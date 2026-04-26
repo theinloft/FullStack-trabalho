@@ -1,34 +1,40 @@
-import express, { Request, Response } from 'express';
-import { produtoRotas } from './router/produto-router';
-import { ProdutoController } from './controller/produto-controller';
-import { ProdutoService } from './service/produto-service';
-import { ProdutoRepositoryMem } from './repository/produto-repository-mem';
-import { AppDataSource } from './data-source';
-import { Produto } from './entity/produto';
+import express, { Request, Response } from "express";
+import { produtoRotas } from "./router/produto-router";
+import { ProdutoController } from "./controller/produto-controller";
+import { ProdutoService } from "./service/produto-service";
+import { ProdutoRepositoryMem } from "./repository/produto-repository-mem";
+import { AppDataSource } from "./data-source";
+import { Produto } from "./entity/produto";
 import "reflect-metadata";
+import swaggerUi from "swagger-ui-express";
+import swaggerSpec from "./swagger";
 
 const app = express();
 const port = 3000;
 app.use(express.json());
 
 // establish database connection
-AppDataSource.initialize().then(async => {
+AppDataSource.initialize().then((async) => {
+  app.use("/uploads", express.static("my-uploads"));
 
-    app.get('/hello', (req: Request, res: Response) => {
-        res.json({ message: "Hello World!!" });
+  //Inicializacao das dependencias
+  const produtoRepository = AppDataSource.getRepository(Produto);
+  const produtoService = new ProdutoService(produtoRepository);
+  const produtoController = new ProdutoController(produtoService);
+
+ app.use(
+    "/api-docs",
+    swaggerUi.serve,
+    swaggerUi.setup(swaggerSpec, {
+      swaggerOptions: {
+        supportedSubmitMethods: ["get", "post", "put", "delete"],
+      },
     })
+  );
+  
+  app.use("/api/produto", produtoRotas(produtoController));
 
-    app.use('/uploads', express.static('my-uploads'))
-
-
-    //Inicializacao das dependencias
-    const produtoRepository = AppDataSource.getRepository(Produto);
-    const produtoService = new ProdutoService(produtoRepository);
-    const produtoController = new ProdutoController(produtoService);
-
-    app.use('/api/produto', produtoRotas(produtoController))
-
-    app.listen(port, () => {
-    console.log(`Servidor rodando em http://localhost:${port}`);
-    });
+  app.listen(port, () => {
+    console.log(`Servidor rodando em http://localhost:${port}, para acessar a documentação da API: http://localhost:${port}/api-docs`);
+  });
 });
