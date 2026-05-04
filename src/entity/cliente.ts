@@ -3,14 +3,13 @@ import { Pedido } from "./pedido";
 
 @Entity()
 export class Cliente {
-    @PrimaryGeneratedColumn()
-    id?: number;
-    @Column()
-    nome?: string;
+  @PrimaryGeneratedColumn("uuid")
+  id?: string;
+  @Column()
+  nome?: string;
+  @Column()
+  email?: string;
 
-
-
-    @OneToMany(() => Pedido, (pedido) => pedido)
-    pedido?: Pedido[];
-
+  @OneToMany(() => Pedido, (pedido) => pedido.cliente)
+  pedido?: Pedido[];
 }
