@@ -20,7 +20,7 @@ export class ProdutoService {
         return await this.repository.find({relations:{categoria:true}});
     }
 
-    async buscarPorId(id: number): Promise<Produto> {
+    async buscarPorId(id: string): Promise<Produto> {
         let produto = await this.repository.findOne({
                                             where: {id:id},
                                             relations: {categoria:true} });
@@ -30,7 +30,7 @@ export class ProdutoService {
         return produto;
     }
 
-    async atualizar(id:number, produtoAlterado: Produto): Promise<Produto> {
+    async atualizar(id:string, produtoAlterado: Produto): Promise<Produto> {
         if(produtoAlterado && produtoAlterado.nome && produtoAlterado.preco) {
             const produto = await this.repository.findOneBy({id:id});
             if(produto) {
@@ -48,7 +48,7 @@ export class ProdutoService {
         }
     }
 
-    async deletar(id:number) {
+    async deletar(id:string) {
         let produto = await this.repository.findOneBy({id:id});
         if(produto) {
             await this.repository.delete({id:id});

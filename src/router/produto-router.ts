@@ -31,7 +31,7 @@ export const produtoRotas = (controller: ProdutoController): Router => {
 
   /**
    * @swagger
-   * /api/produto/:
+   * /api/produtos/:
    *   post:
    *     summary: Cria um produto
    *     tags:
@@ -69,7 +69,7 @@ export const produtoRotas = (controller: ProdutoController): Router => {
 
   /**
    * @swagger
-   * /api/produto/:
+   * /api/produtos/:
    *   get:
    *     summary: Lista todos os produtos
    *     tags:
@@ -82,48 +82,54 @@ export const produtoRotas = (controller: ProdutoController): Router => {
    */
   router.get("/", controller.listar);
 
-  /**
-   * @swagger
-   * /api/produto/{id}:
-   *   get:
-   *     summary: Busca produto por ID
-   *     tags:
-   *       - Produtos
-   *     parameters:
-   *       - in: path
-   *         name: id
-   *         required: true
-   *         description: ID do produto
-   *         schema:
-   *           type: integer
-   *           example: 1
-   *     responses:
-   *       200:
-   *         description: Produto encontrado
-   *         content:
-   *           application/json:
-   *             schema:
-   *               type: object
-   *               properties:
-   *                 id:
-   *                   type: integer
-   *                 nome:
-   *                   type: string
-   *                 preco:
-   *                   type: number
-   *                 categoria:
-   *                   type: object
-   *                   properties:
-   *                     id:
-   *                       type: integer
-   *       404:
-   *         description: Produto não encontrado
-   */
-  router.get("/:id", controller.buscarPorId);
+/**
+ * @swagger
+ * /api/produtos/{id}:
+ *   get:
+ *     summary: Busca produto por ID
+ *     tags:
+ *       - Produtos
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: ID do produto
+ *         schema:
+ *           type: string
+ *           format: uuid
+ *           example: 91586a2c-878f-48f8-8770-90a87a5acb06
+ *     responses:
+ *       200:
+ *         description: Produto encontrado
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: string
+ *                   format: uuid
+ *                   example: 91586a2c-878f-48f8-8770-90a87a5acb06
+ *                 nome:
+ *                   type: string
+ *                   example: Camiseta
+ *                 preco:
+ *                   type: number
+ *                   example: 59.9
+ *                 categoria:
+ *                   type: object
+ *                   properties:
+ *                     id:
+ *                       type: number
+ *                       example: 1
+ *       404:
+ *         description: Produto não encontrado
+ */
+router.get("/:id", controller.buscarPorId);
 
     /**
    * @swagger
-   * /api/produto/{id}:
+   * /api/produtos/{id}:
    *   delete:
    *     summary: Remove um produto pelo ID
    *     tags:
@@ -134,8 +140,8 @@ export const produtoRotas = (controller: ProdutoController): Router => {
    *         required: true
    *         description: ID do produto
    *         schema:
-   *           type: integer
-   *           example: 1
+   *           type: uuid
+   *           example: 91586a2c-878f-48f8-8770-90a87a5acb06
    *     responses:
    *       200:
    *         description: Produto removido com sucesso
@@ -146,7 +152,7 @@ export const produtoRotas = (controller: ProdutoController): Router => {
 
   /**
    * @swagger
-   * /api/produto/{id}:
+   * /api/produtos/{id}:
    *   put:
    *     summary: Atualiza um produto
    *     tags:
@@ -157,8 +163,8 @@ export const produtoRotas = (controller: ProdutoController): Router => {
    *         required: true
    *         description: ID do produto
    *         schema:
-   *           type: integer
-   *           example: 1
+   *           type: uuid
+   *           example: 91586a2c-878f-48f8-8770-90a87a5acb06
    *     requestBody:
    *       required: true
    *       content:
