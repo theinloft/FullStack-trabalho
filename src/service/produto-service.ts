@@ -14,11 +14,11 @@ export class ProdutoService {
             throw({id:400, msg: "Falta dados obrigatorios de produto"});            
         }
         return await this.repository.save(produto);
-    }
+    };
 
     async listar(): Promise<Produto[]> {
         return await this.repository.find({relations:{categoria:true}});
-    }
+    };
 
     async buscarPorId(id: string): Promise<Produto> {
         let produto = await this.repository.findOne({
@@ -28,7 +28,7 @@ export class ProdutoService {
             throw({id: 404, msg:"Produto nao encontrado!"})
         }
         return produto;
-    }
+    };
 
     async atualizar(id:string, produtoAlterado: Produto): Promise<Produto> {
         if(produtoAlterado && produtoAlterado.nome && produtoAlterado.preco) {
@@ -46,7 +46,7 @@ export class ProdutoService {
         else {
             throw {id:400, msg: "Produto sem dados corretos"};
         }
-    }
+    };
 
     async deletar(id:string) {
         let produto = await this.repository.findOneBy({id:id});
@@ -57,5 +57,5 @@ export class ProdutoService {
         else {
             throw { id: 404, msg: "Produto não encontrado!" }
         }
-    }
+    };
 }

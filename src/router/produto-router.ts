@@ -11,13 +11,13 @@ const storage = multer.diskStorage({
     cb(
       null,
       file.fieldname +
-        "-" +
-        uniqueSuffix +
-        "." +
-        file.originalname.substring(
-          file.originalname.length - 3,
-          file.originalname.length,
-        ),
+      "-" +
+      uniqueSuffix +
+      "." +
+      file.originalname.substring(
+        file.originalname.length - 3,
+        file.originalname.length,
+      ),
     );
   },
 });
@@ -82,52 +82,51 @@ export const produtoRotas = (controller: ProdutoController): Router => {
    */
   router.get("/", controller.listar);
 
-/**
- * @swagger
- * /api/produtos/{id}:
- *   get:
- *     summary: Busca produto por ID
- *     tags:
- *       - Produtos
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         description: ID do produto
- *         schema:
- *           type: string
- *           format: uuid
- *           example: 91586a2c-878f-48f8-8770-90a87a5acb06
- *     responses:
- *       200:
- *         description: Produto encontrado
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 id:
- *                   type: string
- *                   format: uuid
- *                   example: 91586a2c-878f-48f8-8770-90a87a5acb06
- *                 nome:
- *                   type: string
- *                   example: Camiseta
- *                 preco:
- *                   type: number
- *                   example: 59.9
- *                 categoria:
- *                   type: object
- *                   properties:
- *                     id:
- *                       type: number
- *                       example: 1
- *       404:
- *         description: Produto não encontrado
- */
-router.get("/:id", controller.buscarPorId);
-
-    /**
+  /**
+   * @swagger
+   * /api/produtos/{id}:
+   *   get:
+   *     summary: Busca produto por ID
+   *     tags:
+   *       - Produtos
+   *     parameters:
+   *       - in: path
+   *         name: id
+   *         required: true
+   *         description: ID do produto
+   *         schema:
+   *           type: string
+   *           format: uuid
+   *           example: 91586a2c-878f-48f8-8770-90a87a5acb06
+   *     responses:
+   *       200:
+   *         description: Produto encontrado
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               properties:
+   *                 id:
+   *                   type: string
+   *                   format: uuid
+   *                   example: 91586a2c-878f-48f8-8770-90a87a5acb06
+   *                 nome:
+   *                   type: string
+   *                   example: Camiseta
+   *                 preco:
+   *                   type: number
+   *                   example: 59.9
+   *                 categoria:
+   *                   type: object
+   *                   properties:
+   *                     id:
+   *                       type: number
+   *                       example: 1
+   *       404:
+   *         description: Produto não encontrado
+   */
+  router.get("/:id", controller.buscarPorId);
+  /**
    * @swagger
    * /api/produtos/{id}:
    *   delete:
@@ -140,7 +139,8 @@ router.get("/:id", controller.buscarPorId);
    *         required: true
    *         description: ID do produto
    *         schema:
-   *           type: uuid
+   *           type: string
+   *           format: uuid
    *           example: 91586a2c-878f-48f8-8770-90a87a5acb06
    *     responses:
    *       200:
@@ -163,7 +163,8 @@ router.get("/:id", controller.buscarPorId);
    *         required: true
    *         description: ID do produto
    *         schema:
-   *           type: uuid
+   *           type: string
+   *           format: uuid
    *           example: 91586a2c-878f-48f8-8770-90a87a5acb06
    *     requestBody:
    *       required: true
@@ -195,7 +196,6 @@ router.get("/:id", controller.buscarPorId);
    *         description: Produto não encontrado
    */
   router.put("/:id", controller.atualizar);
-  
 
 
   router.post(
