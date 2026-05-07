@@ -10,7 +10,8 @@ padronização de commit - descrevendo um commit:
 Como iniciar:
 - baixar o branch, utilizando a opção git clone + url gerada pelo clone repositório.
 - criar a base de dados no PgAdmin, configurar os dados em Src/Data-source.ts.
-- abrir a pasta baixada no vscode, utilizando o terminal dentro do vscode, rodar o comando: npm run dev
+- abrir a pasta baixada no vscode, utilizando o terminal dentro do vscode, rodar no terminal, npm install para instalar as dependências.
+- para rodar a API, utilize o comando: npm run dev
 - acessar no navegador, a URL do Swagger: http://localhost:3000/api-docs/
 
 Endpoints disponíveis:
