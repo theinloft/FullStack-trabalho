@@ -1,6 +1,8 @@
 # FullStack
 repositório para o trabalho de FullStack 2026/1
 
+utilizando node js, typeORM, Swagger para documentação de API, React Vite.
+
 padronização de commit - descrevendo um commit:
 
 - Feature: breve descrição.
