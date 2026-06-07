@@ -3,7 +3,7 @@
   wrap: nowrap;
   display: flex;
   flex-direction: row;
-  diplay: flex;
+  display: flex;
   justify-content: space-around;
 }
 
@@ -12,13 +12,15 @@
   font-size: 90px;
   font-weight: bold;
   font-family: "Arial", sans-serif;
-  padding: 20px 20px 20px 20px;
+  width: 100%;
+  margin-left: 20px;
 }
 
 .material-icons {
   color: #ffffff;
   font-size: 3vw; /* 3% da largura da tela */
   margin: 5px 5px 5px 5px;
+  flex-grow: 1;
 }
 .material-icons:hover {
   color: #f5c800;
@@ -27,7 +29,23 @@
 
 .linha-divisor {
   border: none;
-  border-top: 5px solid #f5c800;
+  border-top: 10px solid #f5c800;
   width: 100%;
   margin: 0;
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+    "FILL" 1,
+    "wght" 400,
+    "GRAD" 0,
+    "opsz" 48;
+
+  color: #ffffff;
+  font-size: 3vw; /* 3% da largura da tela */
+}
+
+.material-symbols-outlined:hover {
+  color: #f5c800;
+  cursor: pointer;
 }

@@ -11,7 +11,7 @@ function Menu() {
           <li>COLEÇÕES</li>
         </ul>
         <span className="material-icons">search</span>
-        <span className="material-icons">shopping_cart_checkout</span>
+        <span className="material-symbols-outlined">shopping_cart</span>
         <span className="material-icons">account_circle</span>
       </nav>
       <hr className="linha-divisor" />
