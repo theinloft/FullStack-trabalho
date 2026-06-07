@@ -1,5 +1,11 @@
 import swaggerJsdoc from "swagger-jsdoc";
 import path from "path";
+import fs from "fs";
+
+const routerPath = path.join(__dirname, "router");
+const routerFiles = fs
+  .readdirSync(routerPath)
+  .map((f) => path.join(routerPath, f));
 
 const swaggerSpec = swaggerJsdoc({
   definition: {
@@ -9,7 +15,7 @@ const swaggerSpec = swaggerJsdoc({
       version: "1.0.0",
     },
   },
-  apis: [path.join(process.cwd(), "src/**/*.ts")], 
+  apis: routerFiles,
 });
 
 export default swaggerSpec;
