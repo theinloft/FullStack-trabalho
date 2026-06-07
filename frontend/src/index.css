@@ -1,0 +1,10 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+:root {
+  --cor-primaria: #f5c800;
+  --cor-fundo: #111;
+  --fonte-principal: 'Arial', sans-serif;
+}

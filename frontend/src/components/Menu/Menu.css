@@ -1,0 +1,33 @@
+.menu {
+  background-color: #111111;
+  wrap: nowrap;
+  display: flex;
+  flex-direction: row;
+  diplay: flex;
+  justify-content: space-around;
+}
+
+.logo {
+  color: #f5c800;
+  font-size: 90px;
+  font-weight: bold;
+  font-family: "Arial", sans-serif;
+  padding: 20px 20px 20px 20px;
+}
+
+.material-icons {
+  color: #ffffff;
+  font-size: 3vw; /* 3% da largura da tela */
+  margin: 5px 5px 5px 5px;
+}
+.material-icons:hover {
+  color: #f5c800;
+  cursor: pointer;
+}
+
+.linha-divisor {
+  border: none;
+  border-top: 5px solid #f5c800;
+  width: 100%;
+  margin: 0;
+}
