@@ -18,10 +18,11 @@
 
 .material-icons {
   color: #ffffff;
-  font-size: 3vw; /* 3% da largura da tela */
+  font-size: 2vw; /* 2% da largura da tela */
   margin: 5px 5px 5px 5px;
   flex-grow: 1;
 }
+
 .material-icons:hover {
   color: #f5c800;
   cursor: pointer;
@@ -42,7 +43,7 @@
     "opsz" 48;
 
   color: #ffffff;
-  font-size: 3vw; /* 3% da largura da tela */
+  font-size: 2vw; /* 2% da largura da tela */
 }
 
 .material-symbols-outlined:hover {
