@@ -1,7 +1,7 @@
 .hero {
   position: relative;
   width: 100%;
-  height: 100vh;
+  height: 90vh;
   overflow: hidden;
   font-family: "Arial Black", Arial, sans-serif;
 }
@@ -21,6 +21,7 @@
 .bgSkate {
   object-position: center 55%;
   filter: grayscale(60%) brightness(0.8);
+  
 }
 
 .bgSneaker {
