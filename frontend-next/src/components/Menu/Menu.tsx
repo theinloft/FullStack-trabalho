@@ -11,19 +11,16 @@ function Menu() {
             <li>SURF</li>
             <li>COLEÇÕES</li>
           </ul>
-
         </div>
 
         <div className="lista-responsive">
-        <a className="material-icons">dehaze </a>
-      </div>
+          <a className="material-icons">dehaze </a>
+        </div>
         <a className="material-icons">search</a>
         <a className="material-symbols-outlined">shopping_cart</a>
         <a className="material-icons">account_circle</a>
       </nav>
       <hr className="linha-divisor" />
-      
-
     </>
   );
 }
