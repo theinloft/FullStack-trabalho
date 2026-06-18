@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import Menu from "@/components/Menu/Menu";
 
 export const metadata: Metadata = {
   title: "SHRED_LAB",
@@ -23,7 +24,10 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body>{children}</body>
+      <body>
+        <Menu />
+        {children}
+      </body>
     </html>
   );
 }

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import "./Menu.css";
 
 function Menu() {
@@ -14,11 +15,19 @@ function Menu() {
         </div>
 
         <div className="lista-responsive">
-          <a className="material-icons">dehaze </a>
+          <Link href="#" className="material-icons">
+            dehaze{" "}
+          </Link>
         </div>
-        <a className="material-icons">search</a>
-        <a className="material-symbols-outlined">shopping_cart</a>
-        <a className="material-icons">account_circle</a>
+        <Link href="#" className="material-icons">
+          search
+        </Link>
+        <Link href="#" className="material-symbols-outlined">
+          shopping_cart
+        </Link>
+        <Link href="/login" className="material-icons">
+          account_circle
+        </Link>
       </nav>
       <hr className="linha-divisor" />
     </>
