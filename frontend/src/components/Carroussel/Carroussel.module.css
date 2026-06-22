@@ -18,24 +18,24 @@
 }
 
 /* tratamento individual */
-.bgSkate {
+.gestaoClientes {
   object-position: center 55%;
   filter: grayscale(60%) brightness(0.8);
 }
 
-.bgSneaker {
+.gestaoProdutos {
   object-position: center 30%;
   filter: grayscale(30%) brightness(0.9);
 }
 
-.bgSkate2 {
+.gestaoPedidos {
   object-position: center bottom;
   filter: grayscale(70%) brightness(0.7);
 }
 
 /* responsivo */
 @media (max-width: 768px) {
-  .bgSkate {
+  .gestaoClientes {
     object-position: 60% 70%; /* ajusta para mobile */
   }
 
@@ -58,7 +58,7 @@
 }
 
 @media (max-width: 480px) {
-  .bgSkate {
+  .gestaoClientes {
     object-position: 65% 70%;
   }
 

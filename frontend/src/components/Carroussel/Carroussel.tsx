@@ -1,35 +1,37 @@
 import { useState, useEffect } from "react";
 import styles from "./Carroussel.module.css";
+import { useNavigate } from "react-router-dom";
 
 const slides = [
   {
     id: 1,
-    imagem: "/adam-barclay-hUwwtSxWd_s-unsplash.jpg",
-    classe: styles.bgSkate,
-    tag: "NEW DROP",
-    titulo: "PURE",
-    subtitulo: "MOMENTUM",
+    imagem: "/firmbee-com-SpVHcbuKi6E-unsplash.jpg",
+    classe: styles.gestaoClientes,
+    tag: "GESTÃO DE CLIENTES (CRM)",
+    titulo: "Conheça cada cliente profundamente",
   },
   {
     id: 2,
-    imagem: "/lucas-kohoko-dNvY4ufMAwI-unsplash.jpg",
-    classe: styles.bgSneaker,
-    tag: "SS_2026",
-    titulo: "STREET",
-    subtitulo: "CULTURE",
+    imagem: "/jessie-mccall-guXX_Wm-wnY-unsplash.jpg",
+    classe: styles.gestaoProdutos,
+    tag: "GESTÃO DE PRODUTOS",
+    titulo: "Gerencie seu estoque de forma inteligente",
+    subtitulo: "Gerenciador de produtos",
   },
   {
     id: 3,
-    imagem: "/photo-skate.jfif",
-    classe: styles.bgSkate2,
-    tag: "COLLAB",
-    titulo: "NO",
-    subtitulo: "LIMITS_",
+    imagem: "/spoton-fgnYjaLsWDk-unsplash (1).jpg",
+    classe: styles.gestaoPedidos,
+    tag: "GERENCIAMENTO DE PEDIDOS",
+    titulo: "Gerencie facilmente seus pedidos",
+    subtitulo: "Pedidos em um só lugar",
   },
 ];
 
 function Carroussel() {
   const [slideIndex, setSlideIndex] = useState(0);
+
+  const navigate = useNavigate();
 
   const anterior = () => {
     setSlideIndex((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
@@ -62,8 +64,27 @@ function Carroussel() {
           <span className={styles.destaque}>{slide.subtitulo}</span>
         </h1>
         <div className={styles.btnGroup}>
-          <button className={styles.btnFill}>EXPLORE_GEAR</button>
-          <button className={styles.btnStroke}>WATCH_FILM</button>
+          {(() => {
+            return (
+              <button
+                className={styles.btnFill}
+                onClick={() => navigate("/cadastro-cliente")}
+              >
+                Cadastra-se
+              </button>
+            );
+          })()}
+
+          {(() => {
+            return (
+              <button
+                onClick={() => navigate("/login")}
+                className={styles.btnStroke}
+              >
+                Já tem conta? Faça Login
+              </button>
+            );
+          })()}
         </div>
       </div>
 

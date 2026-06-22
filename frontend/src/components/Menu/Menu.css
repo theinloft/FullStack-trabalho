@@ -21,6 +21,7 @@
   font-size: 15px;
   margin: 5px 5px 5px 5px;
   flex-grow: 1;
+  text-decoration: none;
 }
 
 .material-icons:hover {
@@ -64,6 +65,36 @@
 
 .lista-responsive {
   display: none;
+}
+
+.menu-mobile {
+  background-color: #111111;
+  width: 100%;
+  display: block;
+}
+
+.menu-mobile ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu-button {
+  background-color: #000;
+  border: none;
+  padding: 8px;
+  border-radius: 4px;
+}
+
+.menu-mobile li {
+  color: #f5c800;
+  padding: 15px 20px;
+  border-bottom: 1px solid #333;
+  cursor: pointer;
+}
+
+.menu-mobile li:hover {
+  background-color: #222;
 }
 
 @media screen and (max-width: 740px) {
