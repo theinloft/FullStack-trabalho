@@ -20,7 +20,7 @@ const slides = [
   },
   {
     id: 3,
-    imagem: "/spoton-fgnYjaLsWDk-unsplash (1).jpg",
+    imagem: "/spoton-fgnYjaLsWDk-unsplash.jpg",
     classe: styles.gestaoPedidos,
     tag: "GERENCIAMENTO DE PEDIDOS",
     titulo: "Gerencie facilmente seus pedidos",
