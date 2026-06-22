@@ -15,6 +15,14 @@
   max-width: 380px;
 }
 
+.erro {
+  color: #ff4d4d;
+  font-size: 12px;
+  text-align: center;
+  margin-bottom: 8px;
+  font-family: Arial, sans-serif;
+}
+
 .logo {
   color: #fff;
   font-size: 22px;

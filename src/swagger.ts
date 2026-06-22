@@ -1,6 +1,7 @@
-import swaggerJsdoc from "swagger-jsdoc";
+// import swaggerJsdoc from "swagger-jsdoc";
 import path from "path";
 import fs from "fs";
+import swaggerJsdoc from "swagger-jsdoc";
 
 const routerPath = path.join(__dirname, "router");
 const routerFiles = fs
@@ -14,8 +15,26 @@ const swaggerSpec = swaggerJsdoc({
       title: "APIs Ecommerce",
       version: "1.0.0",
     },
+    tags: [
+      { name: "Usuarios", description: "Rotas de autenticação" },
+      { name: "Clientes", description: "Gerenciamento de clientes" },
+      { name: "Pedidos", description: "Gerenciamento de pedidos" },
+      { name: "Produtos", description: "Gerenciamento de produtos" },
+    ],
+
+    components: {
+      securitySchemes: {
+        bearerAuth: {
+          type: "http",
+          scheme: "bearer",
+          bearerFormat: "JWT",
+        },
+      },
+    },
   },
-  apis: routerFiles,
+  apis: ["./src/**/*.ts", "./dist/**/*.js"],
 });
+
+console.log("Swagger spec:", JSON.stringify(swaggerSpec, null, 2));
 
 export default swaggerSpec;
