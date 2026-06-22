@@ -1,6 +1,8 @@
 import styles from "./Login.module.css";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
+  const navigate = useNavigate();
   return (
     <main className={styles.main}>
       <div className={styles.card}>
@@ -18,6 +20,9 @@ function Login() {
         </div>
 
         <button className={styles.btn}>ENTRAR</button>
+        <button className={styles.btn} onClick={() => navigate("/")}>
+          VOLTAR
+        </button>
 
         <p className={styles.rodape}>
           Não tem conta?{" "}
