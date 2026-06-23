@@ -44,7 +44,6 @@ function Login() {
       <div className={styles.card}>
         <h1 className={styles.logo}>Gestão de pedidos</h1>
         <p className={styles.subtitulo}>ACESSE SUA CONTA</p>
-
         <div className={styles.campo}>
           <label className={styles.label}>EMAIL</label>
           <input
@@ -52,6 +51,7 @@ function Login() {
             className={styles.input}
             value={form.email}
             onChange={(e) => atualizar("email", e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && entrar()}
           />
         </div>
 
@@ -62,6 +62,7 @@ function Login() {
             className={styles.input}
             value={form.senha}
             onChange={(e) => atualizar("senha", e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && entrar()}
           />
         </div>
 
