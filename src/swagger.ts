@@ -22,6 +22,8 @@ const swaggerSpec = swaggerJsdoc({
       { name: "Produtos", description: "Gerenciamento de produtos" },
     ],
 
+    security: [{ bearerAuth: [] }],
+
     components: {
       securitySchemes: {
         bearerAuth: {
