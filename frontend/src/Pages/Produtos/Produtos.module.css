@@ -4,6 +4,7 @@
   font-family: "Arial Black", Arial, sans-serif;
   padding: 48px;
 }
+
 .titulo {
   font-size: clamp(24px, 3vw, 40px);
   font-weight: 900;
@@ -11,4 +12,112 @@
   text-transform: uppercase;
   letter-spacing: -1px;
   line-height: 1;
+}
+.secaoHead {
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.secaoTitulo {
+  color: #fff;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 2px;
+}
+
+.tableHead {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  padding: 0 0 8px;
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  margin-bottom: 4px;
+}
+.row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.row:hover {
+  background: rgba(245, 200, 0, 0.03);
+}
+
+.celula {
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.celulaSecundaria {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 12px;
+  font-weight: 400;
+  font-family: Arial, sans-serif;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.btnNovo {
+  background: #f5c800;
+  color: #111;
+  border: none;
+  padding: 10px 20px;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.btnNovo:hover {
+  background: #fff;
+}
+
+.acoes {
+  display: flex;
+  gap: 8px;
+}
+
+.btnEditar {
+  background: transparent;
+  color: #f5c800;
+  border: 1px solid #f5c800;
+  padding: 4px 12px;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.btnEditar:hover {
+  background: #f5c800;
+  color: #111;
+}
+
+.btnExcluir {
+  background: transparent;
+  color: rgba(255, 80, 80, 0.8);
+  border: 1px solid rgba(255, 80, 80, 0.4);
+  padding: 4px 12px;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.btnExcluir:hover {
+  background: rgba(255, 80, 80, 0.15);
 }
