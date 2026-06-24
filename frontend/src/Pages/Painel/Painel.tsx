@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import styles from "./Painel.module.css";
+import Paginacao from "../../components/Paginacao/Paginacao";
 
 type Cliente = {
   id: string;
@@ -17,6 +18,8 @@ type Pedido = {
   id: string;
   HorarioPedido: string;
 };
+
+const POR_PAGINA = 5;
 
 function useApi<T>(url: string) {
   const [data, setData] = useState<T | null>(null);
@@ -39,6 +42,15 @@ function useApi<T>(url: string) {
 }
 
 export default function Painel() {
+  const [pagClientes, setPagClientes] = useState(1);
+  const [pagProdutos, setPagProdutos] = useState(1);
+  const [pagPedidos, setPagPedidos] = useState(1);
+
+  function paginar<T>(lista: T[], pagina: number) {
+    const inicio = (pagina - 1) * POR_PAGINA;
+    return lista.slice(inicio, inicio + POR_PAGINA);
+  }
+
   const { data: clientes } = useApi<Cliente[]>(
     "http://localhost:3000/api/clientes",
   );
@@ -90,7 +102,7 @@ export default function Painel() {
             <span>ID</span>
             <span>DATA</span>
           </div>
-          {pedidos?.map((p) => (
+          {paginar(pedidos ?? [], pagPedidos).map((p) => (
             <div key={p.id} className={styles.row}>
               <span className={styles.celula}>{p.id.substring(0, 8)}...</span>
               <span className={styles.celulaSecundaria}>
@@ -98,14 +110,19 @@ export default function Painel() {
               </span>
             </div>
           ))}
+          <Paginacao
+            pagina={pagPedidos}
+            total={pedidos?.length ?? 0}
+            porPagina={POR_PAGINA}
+            onChange={setPagPedidos}
+          />
         </section>
-
         {/* Clientes */}
         <section className={styles.secao}>
           <div className={styles.secaoHead}>
             <span className={styles.secaoTitulo}>CLIENTES</span>
           </div>
-          {clientes?.map((c) => (
+          {paginar(clientes ?? [], pagClientes).map((c) => (
             <div key={c.id} className={styles.clienteCard}>
               <div className={styles.avatar}>
                 {c.nome.substring(0, 2).toUpperCase()}
@@ -116,6 +133,12 @@ export default function Painel() {
               </div>
             </div>
           ))}
+          <Paginacao
+            pagina={pagClientes}
+            total={clientes?.length ?? 0}
+            porPagina={POR_PAGINA}
+            onChange={setPagClientes}
+          />
         </section>
 
         {/* Produtos */}
@@ -127,7 +150,7 @@ export default function Painel() {
             <span>NOME</span>
             <span>PREÇO</span>
           </div>
-          {produtos?.map((p) => (
+          {paginar(produtos ?? [], pagProdutos).map((p) => (
             <div key={p.id} className={styles.row}>
               <span className={styles.celula}>{p.nome}</span>
               <span className={styles.celulaSecundaria}>
@@ -135,6 +158,12 @@ export default function Painel() {
               </span>
             </div>
           ))}
+          <Paginacao
+            pagina={pagProdutos}
+            total={produtos?.length ?? 0}
+            porPagina={POR_PAGINA}
+            onChange={setPagProdutos}
+          />
         </section>
       </div>
     </div>
