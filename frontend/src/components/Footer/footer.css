@@ -5,7 +5,7 @@
 }
 
 .foot address .titulo {
-	padding-top: 30px;
+	padding-top: 10px;
 	color: #000;
 	display: block;
     margin-block-start: 1.33em;
@@ -35,6 +35,7 @@
 .area-footer {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     flex-wrap: wrap;
     width: 80%;
     margin: 0 auto;
@@ -49,13 +50,9 @@
 } */
 
 .social-nav li {
-	/*remove os marcadores da lista*/
 	list-style-type: none;
-	/*permite que os elementos fiquem lado a lado*/
 	display: inline-block;
-	/*padding-left: 10px;*/
-	padding-top: 30px; 
-	/*padding: 40px -40px 0px 0px;*/
+	padding-top: 10px; 
 	width: 70px;
 }
 

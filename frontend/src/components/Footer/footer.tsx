@@ -8,9 +8,8 @@ export function Footer() {
 
                 <address>
                     <p className="titulo">Contato: </p>
-                    <p>
-                        Avenida Lavras, 329 - Petrópolis
-                    </p>
+                    <p>Avenida Lavras, 329 - Petrópolis</p>
+                    <p> Porto Alegre - RS Telefone: (51) 3215-1111</p>
                 </address>
 
                 <nav>
