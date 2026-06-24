@@ -17,7 +17,7 @@ export class ClienteService {
   };
 
     async listar(): Promise<Cliente[]> {
-        return await this.repository.find({relations:{pedido:true}});
+       return await this.repository.find();
     };
 
     async buscarPorId(id: string): Promise<Cliente> {
