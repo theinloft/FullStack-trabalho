@@ -31,7 +31,7 @@ import { UsuarioRepository } from "./repository/usuario-repository";
 const app = express();
 const port = 3000;
 
-app.use(cors({ origin: "http://localhost:5173" }));
+app.use(cors({ origin: ["http://localhost:5173", "http://localhost:3000"] }));
 app.use(express.json());
 
 AppDataSource.initialize()
@@ -67,6 +67,7 @@ AppDataSource.initialize()
       swaggerUi.setup(swaggerSpec, {
         swaggerOptions: {
           supportedSubmitMethods: ["get", "post", "put", "delete"],
+           persistAuthorization: true,
         },
       }),
     );
