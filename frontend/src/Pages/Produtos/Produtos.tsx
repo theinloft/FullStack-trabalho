@@ -5,16 +5,17 @@ import { useEffect, useState } from "react";
 
 const POR_PAGINA = 5;
 
+type Categoria = {
+  id: number;
+  categoria: string;
+};
+
 type Produto = {
   id: string;
   nome: string;
   preco: number;
+  categoria?: Categoria;
 };
-
-const camposProduto = [
-  { label: "NOME", chave: "nome" },
-  { label: "PREÇO", chave: "preco", tipo: "number" },
-];
 
 function paginar<T>(lista: T[], pagina: number) {
   const inicio = (pagina - 1) * POR_PAGINA;
@@ -48,17 +49,37 @@ export default function Produtos() {
 
   const [criando, setCriando] = useState(false);
 
-  const [form, setForm] = useState({ nome: "", preco: 0 });
+  const [form, setForm] = useState({ nome: "", preco: 0, categoriaId: 0 });
+
+  const { data: categorias } = useApi<Categoria[]>(
+    "http://localhost:3000/api/categorias",
+  );
 
   const { data: produtos, setData: setProdutos } = useApi<Produto[]>(
     "http://localhost:3000/api/produtos",
   );
 
+  const camposProduto = [
+    { label: "NOME", chave: "nome" },
+    { label: "PREÇO", chave: "preco", tipo: "number" },
+    {
+      label: "CATEGORIA",
+      chave: "categoriaId",
+      tipo: "select",
+      opcoes:
+        categorias?.map((c) => ({ label: c.categoria, value: c.id })) ?? [],
+    },
+  ];
+
   const token = localStorage.getItem("token");
 
   function abrirEdicao(p: Produto) {
     setEditando(p);
-    setForm({ nome: p.nome, preco: p.preco });
+    setForm({
+      nome: p.nome,
+      preco: p.preco,
+      categoriaId: p.categoria?.id || 0,
+    });
   }
 
   async function salvarEdicao() {
@@ -100,7 +121,7 @@ export default function Produtos() {
     const novo = await res.json();
     setProdutos((prev) => (prev ? [...prev, novo] : [novo]));
     setCriando(false);
-    setForm({ nome: "", preco: 0 });
+    setForm({ nome: "", preco: 0, categoriaId: 0 });
   }
 
   return (
@@ -111,7 +132,7 @@ export default function Produtos() {
           className={styles.btnNovo}
           onClick={() => {
             setCriando(true);
-            setForm({ nome: "", preco: 0 });
+            setForm({ nome: "", preco: 0, categoriaId: 0 });
           }}
         >
           + NOVO PRODUTO
@@ -124,6 +145,7 @@ export default function Produtos() {
         <div className={styles.tableHead}>
           <span>NOME</span>
           <span>PREÇO</span>
+          <span>CATEGORIA</span>
           <span>AÇÕES</span>
         </div>
         {paginar(produtos ?? [], pagProdutos).map((p) => (
@@ -131,6 +153,9 @@ export default function Produtos() {
             <span className={styles.celula}>{p.nome}</span>
             <span className={styles.celulaSecundaria}>
               R$ {Number(p.preco).toFixed(2)}
+            </span>
+            <span className={styles.celulaSecundaria}>
+              {p.categoria?.categoria ?? "—"}
             </span>
             <span className={styles.celulaAcoes}>
               <button
