@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from "./Painel.module.css";
 import Paginacao from "../../components/Paginacao/Paginacao";
+import { useNavigate } from "react-router-dom";
 
 type Cliente = {
   id: string;
@@ -46,6 +47,8 @@ export default function Painel() {
   const [pagProdutos, setPagProdutos] = useState(1);
   const [pagPedidos, setPagPedidos] = useState(1);
 
+  const navigate = useNavigate();
+
   function paginar<T>(lista: T[], pagina: number) {
     const inicio = (pagina - 1) * POR_PAGINA;
     return lista.slice(inicio, inicio + POR_PAGINA);
@@ -75,17 +78,29 @@ export default function Painel() {
 
       {/* KPIs */}
       <div className={styles.kpis}>
-        <div className={styles.kpi}>
+        <div
+          className={styles.kpi}
+          onClick={() => navigate("/pedidos")}
+          style={{ cursor: "pointer" }}
+        >
           <span className={styles.kpiNum}>{pedidos?.length ?? "—"}</span>
           <span className={styles.kpiLabel}>PEDIDOS</span>
         </div>
-        <div className={styles.kpi}>
+        <div
+          className={styles.kpi}
+          onClick={() => navigate("/clientes")}
+          style={{ cursor: "pointer" }}
+        >
           <span className={`${styles.kpiNum} ${styles.amarelo}`}>
             {clientes?.length ?? "—"}
           </span>
           <span className={styles.kpiLabel}>CLIENTES</span>
         </div>
-        <div className={styles.kpi}>
+        <div
+          className={styles.kpi}
+          onClick={() => navigate("/produtos")}
+          style={{ cursor: "pointer" }}
+        >
           <span className={styles.kpiNum}>{produtos?.length ?? "—"}</span>
           <span className={styles.kpiLabel}>PRODUTOS</span>
         </div>
