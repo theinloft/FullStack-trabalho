@@ -1,8 +1,10 @@
 import styles from "./Produtos.module.css";
 import Paginacao from "../../components/Paginacao/Paginacao";
+import { paginar } from "../../utils/utils";
+import { useApi } from "../../hooks/useApi";
 import Modal from "../../components/Modal/Modal";
 import ModalConfirmar from "../../components/ModalConfirmar/ModalConfirmar";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const POR_PAGINA = 5;
 
@@ -18,31 +20,6 @@ type Produto = {
   imagem?: string;
   categoria?: Categoria;
 };
-
-function paginar<T>(lista: T[], pagina: number) {
-  const inicio = (pagina - 1) * POR_PAGINA;
-  return lista.slice(inicio, inicio + POR_PAGINA);
-}
-
-function useApi<T>(url: string) {
-  const [data, setData] = useState<T | null>(null);
-  const [erro, setErro] = useState("");
-
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    fetch(url, {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-      .then((res) => {
-        if (!res.ok) throw new Error("Erro ao buscar dados");
-        return res.json();
-      })
-      .then(setData)
-      .catch((e) => setErro(e.message));
-  }, [url]);
-
-  return { data, erro, setData };
-}
 
 export default function Produtos() {
   const [erro, setErro] = useState("");
@@ -211,7 +188,7 @@ export default function Produtos() {
           <span>CATEGORIA</span>
           <span>AÇÕES</span>
         </div>
-        {paginar(produtos ?? [], pagProdutos).map((p) => (
+        {paginar(produtos ?? [], pagProdutos, POR_PAGINA).map((p) => (
           <div key={p.id} className={styles.row}>
             <span className={styles.celula} onClick={() => setVisualizando(p)}>
               {p.nome}
