@@ -6,6 +6,7 @@ import Painel from "./Pages/Painel/Painel";
 import Layout from "./Pages/Layout";
 import LayoutPainel from "./Pages/LayoutPainel";
 import Produtos from "./Pages/Produtos/Produtos";
+import Clientes from "./Pages/Clientes/Clientes";
 
 function App() {
   return (
@@ -19,7 +20,7 @@ function App() {
           <Route element={<LayoutPainel />}>
             <Route path="/painel" element={<Painel />} />
             <Route path="/produtos" element={<Produtos />} />
-            {/* <Route path="/clientes" element={<Clientes />} /> */}
+            <Route path="/clientes" element={<Clientes />} />
           </Route>
         </Route>
       </Routes>
