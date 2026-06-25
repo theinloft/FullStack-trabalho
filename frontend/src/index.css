@@ -2,7 +2,12 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-   
+}
+
+html,
+body {
+  overflow-x: hidden;
+  max-width: 100%;
 }
 :root {
   --cor-primaria: #f5c800;

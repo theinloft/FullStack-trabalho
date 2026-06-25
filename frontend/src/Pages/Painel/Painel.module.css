@@ -3,6 +3,8 @@
   min-height: 100vh;
   font-family: "Arial Black", Arial, sans-serif;
   padding: 48px;
+  overflow-x: hidden;
+  max-width: 100%;
 }
 
 .header {
