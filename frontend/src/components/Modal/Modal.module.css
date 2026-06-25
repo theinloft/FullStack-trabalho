@@ -109,3 +109,52 @@
   font-family: Arial, sans-serif;
   margin: 0;
 }
+
+.btnImagem {
+  background: #f5c800;
+  color: #111;
+  border: none;
+  padding: 10px 20px;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  font-family: inherit;
+  display: inline-block;
+  text-align: center;
+}
+
+.btnImagem:hover {
+  background: #fff;
+}
+
+@media (max-width: 768px) {
+  .modal {
+    padding: 24px 16px;
+    margin: 0 16px;
+  }
+
+  .modalTitulo {
+    font-size: 14px;
+  }
+
+  .input {
+    font-size: 13px;
+    padding: 10px 12px;
+  }
+
+  .modalAcoes {
+    flex-direction: column;
+  }
+
+  .btnSalvar,
+  .btnCancelar {
+    padding: 10px 16px;
+    font-size: 10px;
+  }
+
+  .btnImagem {
+    width: 100%;
+    text-align: center;
+  }
+}

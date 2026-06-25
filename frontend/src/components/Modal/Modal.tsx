@@ -13,6 +13,7 @@ type Props = {
   form: Record<string, unknown>;
   erro?: string;
   onChange: (chave: string, valor: string) => void;
+  onChangeImagem?: (file: File) => void;
   onConfirmar: () => void;
   onCancelar: () => void;
   labelConfirmar?: string;
@@ -27,6 +28,7 @@ export default function Modal({
   onConfirmar,
   onCancelar,
   labelConfirmar = "SALVAR",
+  onChangeImagem,
 }: Props) {
   return (
     <div className={styles.overlay}>
@@ -60,6 +62,22 @@ export default function Modal({
             )}
           </div>
         ))}
+        {onChangeImagem && (
+          <div className={styles.campo}>
+            <label className={styles.label}>IMAGEM</label>
+            <label className={styles.btnImagem}>
+              SELECIONAR IMAGEM
+              <input
+                type="file"
+                accept="image/*"
+                style={{ display: "none" }}
+                onChange={(e) => {
+                  if (e.target.files?.[0]) onChangeImagem(e.target.files[0]);
+                }}
+              />
+            </label>
+          </div>
+        )}
         {erro && <p className={styles.erro}>{erro}</p>}
         <div className={styles.modalAcoes}>
           <button className={styles.btnSalvar} onClick={onConfirmar}>

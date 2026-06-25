@@ -1,6 +1,7 @@
 import styles from "./Produtos.module.css";
 import Paginacao from "../../components/Paginacao/Paginacao";
 import Modal from "../../components/Modal/Modal";
+import ModalConfirmar from "../../components/ModalConfirmar/ModalConfirmar";
 import { useEffect, useState } from "react";
 
 const POR_PAGINA = 5;
@@ -14,6 +15,7 @@ type Produto = {
   id: string;
   nome: string;
   preco: number;
+  imagem?: string;
   categoria?: Categoria;
 };
 
@@ -45,10 +47,13 @@ function useApi<T>(url: string) {
 export default function Produtos() {
   const [erro, setErro] = useState("");
   const [pagProdutos, setPagProdutos] = useState(1);
+  const [visualizando, setVisualizando] = useState<Produto | null>(null);
 
   const [editando, setEditando] = useState<Produto | null>(null);
+  const [imagem, setImagem] = useState<File | null>(null);
 
   const [criando, setCriando] = useState(false);
+  const [confirmarExcluir, setConfirmarExcluir] = useState<string | null>(null);
 
   const [form, setForm] = useState({ nome: "", preco: 0, categoriaId: 0 });
 
@@ -106,12 +111,27 @@ export default function Produtos() {
       },
       body: JSON.stringify(form),
     });
+
+    if (imagem) {
+      const formData = new FormData();
+      formData.append("imagem", imagem);
+      await fetch(
+        `http://localhost:3000/api/produtos/imagens/upload/${editando.id}`,
+        {
+          method: "POST",
+          headers: { Authorization: `Bearer ${token}` },
+          body: formData,
+        },
+      );
+    }
+
     setProdutos((prev) =>
       prev
         ? prev.map((p) => (p.id === editando.id ? { ...p, ...form } : p))
         : prev,
     );
     setEditando(null);
+    setImagem(null);
   }
 
   async function excluir(id: string) {
@@ -121,6 +141,7 @@ export default function Produtos() {
       headers: { Authorization: `Bearer ${token}` },
     });
     setProdutos((prev) => (prev ? prev.filter((p) => p.id !== id) : prev));
+    setConfirmarExcluir(null);
   }
 
   async function criarProduto() {
@@ -148,7 +169,21 @@ export default function Produtos() {
     const novo = await res.json();
     setProdutos((prev) => (prev ? [...prev, novo] : [novo]));
     setCriando(false);
+    setImagem(null);
     setForm({ nome: "", preco: 0, categoriaId: 0 });
+
+    if (imagem) {
+      const formData = new FormData();
+      formData.append("imagem", imagem);
+      await fetch(
+        `http://localhost:3000/api/produtos/imagens/upload/${novo.id}`,
+        {
+          method: "POST",
+          headers: { Authorization: `Bearer ${token}` },
+          body: formData,
+        },
+      );
+    }
   }
 
   return (
@@ -178,7 +213,9 @@ export default function Produtos() {
         </div>
         {paginar(produtos ?? [], pagProdutos).map((p) => (
           <div key={p.id} className={styles.row}>
-            <span className={styles.celula}>{p.nome}</span>
+            <span className={styles.celula} onClick={() => setVisualizando(p)}>
+              {p.nome}
+            </span>
             <span className={styles.celulaSecundaria}>
               R$ {Number(p.preco).toFixed(2)}
             </span>
@@ -194,7 +231,7 @@ export default function Produtos() {
               </button>
               <button
                 className={styles.btnExcluir}
-                onClick={() => excluir(p.id)}
+                onClick={() => setConfirmarExcluir(p.id)}
               >
                 EXCLUIR
               </button>
@@ -208,6 +245,13 @@ export default function Produtos() {
           onChange={setPagProdutos}
         />
       </section>
+      {confirmarExcluir && (
+        <ModalConfirmar
+          mensagem="Deseja excluir este produto?"
+          onConfirmar={() => excluir(confirmarExcluir)}
+          onCancelar={() => setConfirmarExcluir(null)}
+        />
+      )}
       {editando && (
         <Modal
           titulo="EDITAR PRODUTO"
@@ -217,6 +261,7 @@ export default function Produtos() {
           onChange={(chave, valor) =>
             setForm((f) => ({ ...f, [chave]: valor }))
           }
+          onChangeImagem={(file) => setImagem(file)}
           onConfirmar={salvarEdicao}
           onCancelar={() => setEditando(null)}
           labelConfirmar="SALVAR"
@@ -231,10 +276,44 @@ export default function Produtos() {
           onChange={(chave, valor) =>
             setForm((f) => ({ ...f, [chave]: valor }))
           }
+          onChangeImagem={(file) => setImagem(file)}
           onConfirmar={criarProduto}
           onCancelar={() => setCriando(false)}
           labelConfirmar="CRIAR"
         />
+      )}
+      {visualizando && (
+        <div
+          className={styles.lightboxOverlay}
+          onClick={() => setVisualizando(null)}
+        >
+          <div className={styles.lightbox} onClick={(e) => e.stopPropagation()}>
+            <button
+              className={styles.lightboxFechar}
+              onClick={() => setVisualizando(null)}
+            >
+              ✕
+            </button>
+            {visualizando.imagem ? (
+              <img
+                className={styles.lightboxImagem}
+                src={`http://localhost:3000/uploads/${visualizando.imagem}`}
+                alt={visualizando.nome}
+              />
+            ) : (
+              <div className={styles.lightboxSemImagem}>SEM IMAGEM</div>
+            )}
+            <div className={styles.lightboxInfo}>
+              <h2 className={styles.lightboxNome}>{visualizando.nome}</h2>
+              <span className={styles.lightboxPreco}>
+                R$ {Number(visualizando.preco).toFixed(2)}
+              </span>
+              <span className={styles.lightboxCategoria}>
+                {visualizando.categoria?.categoria ?? "—"}
+              </span>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );
