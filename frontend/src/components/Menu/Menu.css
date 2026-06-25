@@ -109,6 +109,7 @@
   width: 40vw;
   list-style: none;
   flex-wrap: wrap;
+  align-items: center;
 }
 
 .lista-responsive {
