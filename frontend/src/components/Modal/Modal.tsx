@@ -11,6 +11,7 @@ type Props = {
   titulo: string;
   campos: Campo[];
   form: Record<string, unknown>;
+  erro?: string;
   onChange: (chave: string, valor: string) => void;
   onConfirmar: () => void;
   onCancelar: () => void;
@@ -21,6 +22,7 @@ export default function Modal({
   titulo,
   campos,
   form,
+  erro,
   onChange,
   onConfirmar,
   onCancelar,
@@ -58,7 +60,7 @@ export default function Modal({
             )}
           </div>
         ))}
-
+        {erro && <p className={styles.erro}>{erro}</p>}
         <div className={styles.modalAcoes}>
           <button className={styles.btnSalvar} onClick={onConfirmar}>
             {labelConfirmar}

@@ -43,6 +43,7 @@ function useApi<T>(url: string) {
 }
 
 export default function Produtos() {
+  const [erro, setErro] = useState("");
   const [pagProdutos, setPagProdutos] = useState(1);
 
   const [editando, setEditando] = useState<Produto | null>(null);
@@ -84,6 +85,19 @@ export default function Produtos() {
 
   async function salvarEdicao() {
     if (!editando) return;
+    if (!form.nome.trim()) {
+      setErro("O nome do produto é obrigatório.");
+      return;
+    }
+    if (!form.preco || Number(form.preco) <= 0) {
+      setErro("O preço deve ser maior que zero.");
+      return;
+    }
+    if (!form.categoriaId) {
+      setErro("Selecione uma categoria.");
+      return;
+    }
+    setErro("");
     await fetch(`http://localhost:3000/api/produtos/${editando.id}`, {
       method: "PUT",
       headers: {
@@ -110,6 +124,19 @@ export default function Produtos() {
   }
 
   async function criarProduto() {
+    if (!form.nome.trim()) {
+      setErro("O nome do produto é obrigatório.");
+      return;
+    }
+    if (!form.preco || Number(form.preco) <= 0) {
+      setErro("O preço deve ser maior que zero.");
+      return;
+    }
+    if (!form.categoriaId) {
+      setErro("Selecione uma categoria.");
+      return;
+    }
+    setErro("");
     const res = await fetch("http://localhost:3000/api/produtos", {
       method: "POST",
       headers: {
@@ -132,6 +159,7 @@ export default function Produtos() {
           className={styles.btnNovo}
           onClick={() => {
             setCriando(true);
+            setErro("");
             setForm({ nome: "", preco: 0, categoriaId: 0 });
           }}
         >
@@ -185,6 +213,7 @@ export default function Produtos() {
           titulo="EDITAR PRODUTO"
           campos={camposProduto}
           form={form}
+          erro={erro}
           onChange={(chave, valor) =>
             setForm((f) => ({ ...f, [chave]: valor }))
           }
@@ -198,6 +227,7 @@ export default function Produtos() {
           titulo="NOVO PRODUTO"
           campos={camposProduto}
           form={form}
+          erro={erro}
           onChange={(chave, valor) =>
             setForm((f) => ({ ...f, [chave]: valor }))
           }

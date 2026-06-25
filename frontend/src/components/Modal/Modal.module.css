@@ -102,3 +102,10 @@
   background: #1a1a1a;
   color: #fff;
 }
+
+.erro {
+  color: #ff5050;
+  font-size: 12px;
+  font-family: Arial, sans-serif;
+  margin: 0;
+}
