@@ -20,8 +20,9 @@
   color: #ffffff;
   font-size: 15px;
   margin: 5px 5px 5px 5px;
-  flex-grow: 1;
   text-decoration: none;
+  display: flex;
+  align-items: center;
 }
 
 .material-icons:hover {
@@ -51,6 +52,53 @@
 .material-symbols-outlined:hover {
   color: #f5c800;
   cursor: pointer;
+}
+
+.perfil-wrapper {
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.perfil-icon {
+  color: #ffffff;
+  font-size: 15px;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.perfil-icon:hover {
+  color: #f5c800;
+}
+
+.perfil-dropdown {
+  position: absolute;
+  top: 32px;
+  right: 0;
+  background: #1a1a1a;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 8px;
+  min-width: 120px;
+  z-index: 100;
+}
+
+.perfil-sair {
+  background: transparent;
+  color: #fff;
+  border: none;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  font-family: inherit;
+  width: 100%;
+  padding: 8px;
+  text-align: left;
+}
+
+.perfil-sair:hover {
+  color: #f5c800;
 }
 
 .nav-links {

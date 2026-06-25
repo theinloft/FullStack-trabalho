@@ -1,8 +1,18 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./Menu.css";
 function Menu() {
   const [menuAberto, setMenuAberto] = useState(false);
+  const [perfilAberto, setPerfilAberto] = useState(false);
+  const [token, setToken] = useState(localStorage.getItem("token"));
+
+  useEffect(() => {
+    function handleStorage() {
+      setToken(localStorage.getItem("token"));
+    }
+    window.addEventListener("storage", handleStorage);
+    return () => window.removeEventListener("storage", handleStorage);
+  }, []);
 
   return (
     <>
@@ -29,9 +39,35 @@ function Menu() {
 
         <a className="material-icons">search</a>
 
-        <Link to="/login" className="material-icons">
-          account_circle
-        </Link>
+        {token ? (
+          <div className="perfil-wrapper">
+            <span
+              className="material-icons perfil-icon"
+              onClick={() => setPerfilAberto((prev) => !prev)}
+            >
+              account_circle
+            </span>
+            {perfilAberto && (
+              <div className="perfil-dropdown">
+                <button
+                  className="perfil-sair"
+                  onClick={() => {
+                    localStorage.removeItem("token");
+                    setToken(null);
+                    setPerfilAberto(false);
+                    window.location.href = "/login";
+                  }}
+                >
+                  SAIR
+                </button>
+              </div>
+            )}
+          </div>
+        ) : (
+          <Link to="/login" className="material-icons">
+            account_circle
+          </Link>
+        )}
       </nav>
 
       {menuAberto && (
