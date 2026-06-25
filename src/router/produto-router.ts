@@ -11,13 +11,13 @@ const storage = multer.diskStorage({
     cb(
       null,
       file.fieldname +
-      "-" +
-      uniqueSuffix +
-      "." +
-      file.originalname.substring(
-        file.originalname.length - 3,
-        file.originalname.length,
-      ),
+        "-" +
+        uniqueSuffix +
+        "." +
+        file.originalname.substring(
+          file.originalname.length - 3,
+          file.originalname.length,
+        ),
     );
   },
 });
@@ -197,13 +197,17 @@ export const produtoRotas = (controller: ProdutoController): Router => {
    */
   router.put("/:id", controller.atualizar);
 
-
   router.post(
-    "/imagens/upload",
+    "/imagens/upload/:id",
     upload.single("imagem"),
-    async (req: Request, res: Response): Promise<any> => {
-      console.log(req.file);
-      res.send("Imagem carregada com sucesso!");
+    async (req: Request<{ id: string }>, res: Response): Promise<any> => {
+      if (!req.file) {
+        return res.status(400).json({ msg: "Nenhuma imagem enviada" });
+      }
+      const { id } = req.params;
+      const imagem = req.file.filename;
+      await controller.salvarImagem(id, imagem);
+      res.json({ imagem });
     },
   );
 

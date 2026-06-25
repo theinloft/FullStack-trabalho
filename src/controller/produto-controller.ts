@@ -8,6 +8,10 @@ export class ProdutoController {
     this.service = service;
   }
 
+  async salvarImagem(id: string, imagem: string): Promise<void> {
+    await this.service.salvarImagem(id, imagem);
+  }
+
   inserir = async (req: Request, res: Response): Promise<void> => {
     const produto = req.body;
     try {
@@ -23,18 +27,18 @@ export class ProdutoController {
     res.json(listaProdutos);
   };
 
- buscarPorId = async (req: Request, res: Response): Promise<void> => {
-  const id = req.params.id as string;
+  buscarPorId = async (req: Request, res: Response): Promise<void> => {
+    const id = req.params.id as string;
 
-  try {
-    const produto = await this.service.buscarPorId(id);
-    res.json(produto);
-  } catch (err: any) {
-    res.status(err.status || 500).json({
-      error: err.message || "Erro ao buscar produto"
-    });
-  }
-};
+    try {
+      const produto = await this.service.buscarPorId(id);
+      res.json(produto);
+    } catch (err: any) {
+      res.status(err.status || 500).json({
+        error: err.message || "Erro ao buscar produto",
+      });
+    }
+  };
 
   atualizar = async (req: Request, res: Response): Promise<void> => {
     const id = req.params.id as string;
@@ -62,7 +66,7 @@ export class ProdutoController {
       res.json(await this.service.deletar(id));
     } catch (err: any) {
       res.status(err.status || 500).json({
-        error: err.message || "Erro ao deletar produto"
+        error: err.message || "Erro ao deletar produto",
       });
     }
   };

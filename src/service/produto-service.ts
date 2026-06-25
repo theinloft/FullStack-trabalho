@@ -9,6 +9,15 @@ export class ProdutoService {
     this.repository = repository;
   }
 
+  async salvarImagem(id: string, imagem: string): Promise<Produto> {
+    const produto = await this.repository.findOneBy({ id });
+    if (!produto) {
+      throw { id: 404, msg: "Produto não encontrado" };
+    }
+    produto.imagem = imagem;
+    return await this.repository.save(produto);
+  }
+
   async inserir(produto: Produto): Promise<Produto> {
     if (!produto || !produto.nome || !produto.preco) {
       throw { id: 400, msg: "Falta dados obrigatorios de produto" };
@@ -38,6 +47,7 @@ export class ProdutoService {
         produto.nome = produtoAlterado.nome;
         produto.preco = produtoAlterado.preco;
         produto.categoria = produtoAlterado.categoria;
+        produto.imagem = produtoAlterado.imagem;
         await this.repository.save(produto);
         return produto;
       } else {

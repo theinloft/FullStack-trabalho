@@ -9,6 +9,8 @@ export class Produto {
   nome?: string;
   @Column({ type: "decimal" })
   preco?: number;
+  @Column({ nullable: true })
+  imagem?: string;
   @ManyToOne(() => Categoria, (categoria) => categoria.produto)
   categoria?: Categoria;
 }
