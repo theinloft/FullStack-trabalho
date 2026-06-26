@@ -7,6 +7,8 @@ import Layout from "./Pages/Layout";
 import LayoutPainel from "./Pages/LayoutPainel";
 import Produtos from "./Pages/Produtos/Produtos";
 import Clientes from "./Pages/Clientes/Clientes";
+import Pedidos from "./Pages/Pedidos/Pedidos";
+import FaleConosco from "./Pages/FaleConosco/FaleConosco";
 
 function App() {
   return (
@@ -16,11 +18,13 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<Home />} />
           <Route path="/cadastro-cliente" element={<CadastroCliente />} />
+          <Route path='/fale-conosco' element={<FaleConosco />} />
 
           <Route element={<LayoutPainel />}>
             <Route path="/painel" element={<Painel />} />
             <Route path="/produtos" element={<Produtos />} />
             <Route path="/clientes" element={<Clientes />} />
+            <Route path="/pedidos" element={<Pedidos />} />
           </Route>
         </Route>
       </Routes>
