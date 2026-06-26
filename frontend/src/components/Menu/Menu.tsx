@@ -33,7 +33,7 @@ function Menu() {
           <ul className="nav-links">
             <li>TUTORIAIS</li>
             <li>CASE DE CLIENTES</li>
-            <li>BLOG</li>
+            <li><Link to={'/fale-conosco'}>FALE CONOSCO</Link></li>
           </ul>
         </div>
 
@@ -75,7 +75,7 @@ function Menu() {
           <ul>
             <li>TUTORIAIS</li>
             <li>CASE DE CLIENTES</li>
-            <li>BLOG</li>
+            <li>FALE CONOSCO</li>
           </ul>
         </div>
       )}

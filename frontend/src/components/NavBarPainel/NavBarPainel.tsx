@@ -52,9 +52,15 @@ export default function NavbarPainel() {
         >
           CLIENTES
         </NavLink>
-        <button className={styles.btnSair} onClick={sair}>
-          SAIR
-        </button>
+        <NavLink
+          to="/pedidos"
+          className={({ isActive }) =>
+            isActive ? `${styles.link} ${styles.ativo}` : styles.link
+          }
+          onClick={() => setMenuAberto(false)}
+        >
+          PEDIDOS
+        </NavLink>
       </div>
     </nav>
   );

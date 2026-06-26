@@ -3,8 +3,8 @@
   flex-wrap: nowrap;
   display: flex;
   flex-direction: row;
-  display: flex;
   justify-content: space-around;
+  align-items: center;
 }
 
 .logo {
@@ -74,11 +74,11 @@
 
 .perfil-dropdown {
   position: absolute;
-  top: 32px;
+  top: 25px;
   right: 0;
   background: #1a1a1a;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 8px;
+  padding: 3px;
   min-width: 120px;
   z-index: 100;
 }
@@ -109,7 +109,13 @@
   width: 40vw;
   list-style: none;
   flex-wrap: wrap;
-  align-items: center;
+  gap: 10px;
+
+}
+
+.nav-links li a{
+  text-decoration: none;
+  color: #f5c800;
 }
 
 .lista-responsive {
@@ -146,7 +152,7 @@
   background-color: #222;
 }
 
-@media screen and (max-width: 740px) {
+@media screen and (max-width: 940px) {
   .lista {
     display: none;
   }
