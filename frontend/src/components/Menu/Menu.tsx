@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import "./Menu.css";
 function Menu() {
   const [menuAberto, setMenuAberto] = useState(false);
   const [perfilAberto, setPerfilAberto] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
   const [token, setToken] = useState(localStorage.getItem("token"));
 
   useEffect(() => {
@@ -14,14 +15,38 @@ function Menu() {
     return () => window.removeEventListener("storage", handleStorage);
   }, []);
 
+  useEffect(() => {
+    function handleClickFora(e: MouseEvent) {
+      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
+        setMenuAberto(false);
+      }
+    }
+    document.addEventListener("click", handleClickFora);
+    return () => document.removeEventListener("click", handleClickFora);
+  }, []);
+
+  useEffect(() => {
+    function handleResize() {
+      //por exemplo, se por um acaso, o menu sanduiche tiver aberto, ele irá fechar em 740px, para o layout não ficar com dois menus na transição.
+      if (window.innerWidth > 740) {
+        setMenuAberto(false);
+      }
+    }
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <>
       <nav className="menu">
-        <div className="lista-responsive">
+        <div className="lista-responsive" ref={menuRef}>
           <button
             type="button"
             className="menu-button"
-            onClick={() => setMenuAberto(!menuAberto)}
+            onClick={(e) => {
+              e.stopPropagation();
+              setMenuAberto(!menuAberto);
+            }}
           >
             <span className="material-icons">dehaze</span>
           </button>
@@ -33,7 +58,9 @@ function Menu() {
           <ul className="nav-links">
             <li>TUTORIAIS</li>
             <li>CASE DE CLIENTES</li>
-            <li><Link to={'/fale-conosco'}>FALE CONOSCO</Link></li>
+            <li>
+              <Link to={"/fale-conosco"}>FALE CONOSCO</Link>
+            </li>
           </ul>
         </div>
 
@@ -75,7 +102,9 @@ function Menu() {
           <ul>
             <li>TUTORIAIS</li>
             <li>CASE DE CLIENTES</li>
-            <li>FALE CONOSCO</li>
+            <li>
+              <Link to={"/fale-conosco"}>FALE CONOSCO</Link>
+            </li>
           </ul>
         </div>
       )}

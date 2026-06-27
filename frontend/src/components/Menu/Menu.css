@@ -110,10 +110,11 @@
   list-style: none;
   flex-wrap: wrap;
   gap: 10px;
-
+  font-family: "Arial Black", Arial, sans-serif;
+  font-size: 13;
 }
 
-.nav-links li a{
+.nav-links li a {
   text-decoration: none;
   color: #f5c800;
 }
@@ -146,6 +147,11 @@
   padding: 15px 20px;
   border-bottom: 1px solid #333;
   cursor: pointer;
+}
+
+.menu-mobile li a {
+  text-decoration: none;
+  color: #f5c800;
 }
 
 .menu-mobile li:hover {
