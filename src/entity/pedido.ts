@@ -1,14 +1,10 @@
 import {
   Column,
   Entity,
-  JoinTable,
-  ManyToMany,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
-  Timestamp,
 } from "typeorm";
-import { Produto } from "./produto";
 import { Cliente } from "./cliente";
 import { PedidoItem } from "./PedidoItem";
 
@@ -20,15 +16,14 @@ export class Pedido {
   @Column("timestamp")
   HorarioPedido?: Date;
 
-  @ManyToMany(() => Produto)
-  @JoinTable()
-  produto?: Produto[];
-
   @ManyToOne(() => Cliente)
   cliente?: Cliente;
 
   @OneToMany(() => PedidoItem, (item) => item.pedido, {
-  cascade: true
-})
-itens?: PedidoItem[];
+    cascade: true,
+  })
+  itens?: PedidoItem[];
+
+  @Column({ default: "andamento" })
+  status?: "andamento" | "concluido" | "cancelado";
 }

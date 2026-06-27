@@ -20,69 +20,109 @@ export class PedidoService {
     this.produtoRepository = produtoRepository;
   }
 
- async inserir(body: any): Promise<Pedido> {
-  const { clienteId, itens } = body;
+  async inserir(body: any): Promise<Pedido> {
+    const { clienteId, itens } = body;
 
-  if (!clienteId || !itens || itens.length === 0) {
-    throw { status: 400, message: "Falta dados obrigatorios de pedido" };
+    if (!clienteId || !itens || itens.length === 0) {
+      throw { status: 400, message: "Falta dados obrigatorios de pedido" };
+    }
+
+    const cliente = await this.clienteRepository.findOneBy({ id: clienteId });
+
+    if (!cliente) {
+      throw { status: 404, message: "Cliente não encontrado" };
+    }
+
+    const pedido = new Pedido();
+    pedido.cliente = cliente;
+    pedido.HorarioPedido = new Date();
+    pedido.itens = [];
+
+    for (const item of itens) {
+      const produto = await this.produtoRepository.findOneBy({
+        id: item.produtoId,
+      });
+
+      if (!produto) {
+        throw { status: 404, message: "Produto não encontrado" };
+      }
+
+      pedido.itens.push({
+        produto,
+        quantidade: item.quantidade,
+        preco: produto.preco,
+      });
+    }
+
+    return await this.repository.save(pedido);
   }
 
-  const cliente = await this.clienteRepository.findOneBy({ id: clienteId });
-
-  if (!cliente) {
-    throw { status: 404, message: "Cliente não encontrado" };
+  async listar(): Promise<Pedido[]> {
+    return await this.repository.find({
+      relations: {
+        cliente: true,
+        itens: {
+          produto: true,
+        },
+      },
+    });
   }
 
-  const pedido = new Pedido();
-  pedido.cliente = cliente;
-  pedido.HorarioPedido = new Date();
-  pedido.itens = [];
-
-  for (const item of itens) {
-    const produto = await this.produtoRepository.findOneBy({
-      id: item.produtoId
+  async buscarPorId(id: string): Promise<Pedido> {
+    const pedido = await this.repository.findOne({
+      where: { id },
+      relations: {
+        cliente: true,
+        itens: {
+          produto: true,
+        },
+      },
     });
 
-    if (!produto) {
-      throw { status: 404, message: "Produto não encontrado" };
+    if (!pedido) {
+      throw { status: 404, message: "Pedido não encontrado" };
     }
 
-    pedido.itens.push({
-      produto,
-      quantidade: item.quantidade,
-      preco: produto.preco
-    });
+    return pedido;
   }
 
-  return await this.repository.save(pedido);
-}
-
- async listar(): Promise<Pedido[]> {
-  return await this.repository.find({
-    relations: {
-      cliente: true,
-      itens: {
-        produto: true
-      }
-    }
-  });
-}
-
- async buscarPorId(id: string): Promise<Pedido> {
-  const pedido = await this.repository.findOne({
-    where: { id },
-    relations: {
-      cliente: true,
-      itens: {
-        produto: true
-      }
-    }
-  });
-
-  if (!pedido) {
-    throw { status: 404, message: "Pedido não encontrado" };
+  async atualizarStatus(id: string, status: string): Promise<Pedido> {
+    const pedido = await this.buscarPorId(id);
+    pedido.status = status as "andamento" | "concluido" | "cancelado";
+    return await this.repository.save(pedido);
   }
 
-  return pedido;
-}
+  async editarPedido(id: string, body: any): Promise<Pedido> {
+    const { clienteId, itens } = body;
+
+    if (!clienteId || !itens || itens.length === 0) {
+      throw { status: 400, message: "Falta dados obrigatórios de pedido" };
+    }
+
+    const pedido = await this.buscarPorId(id);
+
+    const cliente = await this.clienteRepository.findOneBy({ id: clienteId });
+    if (!cliente) {
+      throw { status: 404, message: "Cliente não encontrado" };
+    }
+
+    pedido.cliente = cliente;
+    pedido.itens = [];
+
+    for (const item of itens) {
+      const produto = await this.produtoRepository.findOneBy({
+        id: item.produtoId,
+      });
+      if (!produto) {
+        throw { status: 404, message: "Produto não encontrado" };
+      }
+      pedido.itens.push({
+        produto,
+        quantidade: item.quantidade,
+        preco: produto.preco,
+      });
+    }
+
+    return await this.repository.save(pedido);
+  }
 }
