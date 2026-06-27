@@ -26,15 +26,12 @@ export const categoriaRotas = (controller: CategoriaController): Router => {
    *           schema:
    *             type: object
    *             required:
-   *               - nome
-   *               - email
+   *               - categoria
    *             properties:
-   *               nome:
+   *               categoria:
    *                 type: string
-   *                 example: João da Silva
-   *               email:
+   *                 example: Eletrônicos
    *                 type: string
-   *                 example: joao.silva@example.com
    *     responses:
    *       200:
    *         description: Categoria atualizada com sucesso
