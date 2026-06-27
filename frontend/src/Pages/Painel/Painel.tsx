@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styles from "./Painel.module.css";
 import Paginacao from "../../components/Paginacao/Paginacao";
 import { useNavigate } from "react-router-dom";
+import { useApi } from "../../hooks/useApi";
 
 type Cliente = {
   id: string;
@@ -21,26 +22,6 @@ type Pedido = {
 };
 
 const POR_PAGINA = 5;
-
-function useApi<T>(url: string) {
-  const [data, setData] = useState<T | null>(null);
-  const [erro, setErro] = useState("");
-
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    fetch(url, {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-      .then((res) => {
-        if (!res.ok) throw new Error("Erro ao buscar dados");
-        return res.json();
-      })
-      .then(setData)
-      .catch((e) => setErro(e.message));
-  }, [url]);
-
-  return { data, erro };
-}
 
 export default function Painel() {
   const [pagClientes, setPagClientes] = useState(1);
