@@ -38,22 +38,46 @@ export class PedidoController {
     }
   };
 
-  // atualizar = async (req: Request, res: Response): Promise<void> => {
-  //     const id = +req.params.id;
-  //     let produto = req.body;
-  //     try{
-  //         res.json(await this.service.atualizar(id, produto));
-  //     } catch(err: any) {
-  //         res.status(err.id).json(err);
-  //     }
-  // }
+  atualizarStatus = async (
+    req: Request<{ id: string }>,
+    res: Response,
+  ): Promise<void> => {
+    const { id } = req.params;
+    const { status } = req.body;
 
-  // deletar = async (req: Request, res: Response): Promise<void> => {
-  //     const id = +req.params.id;
-  //     try {
-  //         res.json(await this.service.deletar(id));
-  //     } catch(err: any) {
-  //         res.status(err.id).json(err);
-  //     }
-  // }
+    console.log("atualizarStatus chamado!", req.params.id, req.body);
+
+    if (
+      status !== "andamento" &&
+      status !== "concluido" &&
+      status !== "cancelado"
+    ) {
+      res.status(400).json({ error: "Status inválido" });
+      return;
+    }
+
+    try {
+      res.json(await this.service.atualizarStatus(id, status));
+    } catch (err: any) {
+      res
+        .status(err.status || 500)
+        .json({ error: err.message || "Erro ao atualizar status" });
+    }
+  };
+
+  editarPedido = async (
+    req: Request<{ id: string }>,
+    res: Response,
+  ): Promise<void> => {
+    const { id } = req.params;
+    const body = req.body;
+
+    try {
+      res.json(await this.service.editarPedido(id, body));
+    } catch (err: any) {
+      res
+        .status(err.status || 500)
+        .json({ error: err.message || "Erro ao editar pedido" });
+    }
+  };
 }

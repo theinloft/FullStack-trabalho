@@ -107,7 +107,7 @@ export class PedidoService {
     }
 
     pedido.cliente = cliente;
-    pedido.itens = [];
+    pedido.status = "andamento";
 
     for (const item of itens) {
       const produto = await this.produtoRepository.findOneBy({
@@ -116,11 +116,22 @@ export class PedidoService {
       if (!produto) {
         throw { status: 404, message: "Produto não encontrado" };
       }
-      pedido.itens.push({
-        produto,
-        quantidade: item.quantidade,
-        preco: produto.preco,
-      });
+
+      const itemExistente = pedido.itens?.find(
+        (i) => i.produto?.id === item.produtoId,
+      );
+
+      if (itemExistente) {
+        itemExistente.quantidade =
+          (itemExistente.quantidade ?? 0) + item.quantidade;
+      } else {
+        // produto novo, adiciona
+        pedido.itens?.push({
+          produto,
+          quantidade: item.quantidade,
+          preco: produto.preco,
+        });
+      }
     }
 
     return await this.repository.save(pedido);
