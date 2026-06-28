@@ -102,16 +102,22 @@ export const clienteRotas = (controller: ClienteController): Router => {
 
   /**
    * @swagger
-   * /api/clientes/:
+   * /api/clientes:
    *   get:
-   *     summary: Lista todos os clientes
+   *     summary: Lista todos os clientes ou pesquisa por nome
    *     tags:
    *       - Clientes
+   *     parameters:
+   *       - in: query
+   *         name: nome
+   *         required: false
+   *         schema:
+   *           type: string
+   *         description: Nome ou parte do nome do cliente para pesquisa.
+   *         example: João
    *     responses:
    *       200:
-   *         description: Lista de clientes
-   *       array vazio:
-   *         description: Nenhum cliente encontrado
+   *         description: Lista de clientes.
    */
   router.get("/", controller.listar);
 
