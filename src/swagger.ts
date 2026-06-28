@@ -4,9 +4,9 @@ import fs from "fs";
 import swaggerJsdoc from "swagger-jsdoc";
 
 const routerPath = path.join(__dirname, "router");
-const routerFiles = fs
-  .readdirSync(routerPath)
-  .map((f) => path.join(routerPath, f));
+// const routerFiles = fs
+//   .readdirSync(routerPath)
+//   .map((f) => path.join(routerPath, f));
 
 const swaggerSpec = swaggerJsdoc({
   definition: {
@@ -24,6 +24,12 @@ const swaggerSpec = swaggerJsdoc({
 
     security: [{ bearerAuth: [] }],
 
+    swaggerOptions: {
+      supportedSubmitMethods: ["get", "post", "put", "delete", "patch"],
+      persistAuthorization: true,
+      defaultModelsExpandDepth: -1,
+    },
+
     components: {
       securitySchemes: {
         bearerAuth: {
@@ -34,7 +40,12 @@ const swaggerSpec = swaggerJsdoc({
       },
     },
   },
-  apis: ["./src/**/*.ts", "./dist/**/*.js"],
+  apis: [
+    "./src/router/*.ts",
+    "./src/router/*.js",
+    "./router/*.ts",
+    "./router/*.js",
+  ],
 });
 
 console.log("Swagger spec:", JSON.stringify(swaggerSpec, null, 2));

@@ -3,11 +3,11 @@ import styles from "./Pedidos.module.css";
 import { useApi } from "../../hooks/useApi";
 import Paginacao from "../../components/Paginacao/Paginacao";
 import { paginar } from "../../utils/utils";
-import Modal from "../../components/Modal/Modal";
 import ModalConfirmar from "../../components/ModalConfirmar/ModalConfirmar";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import { useNavigate } from "react-router-dom";
+import ModalDetalhesPedido from "../../components/ModalDetalhesPedido/modalDetalhesPedido";
 
 const POR_PAGINA = 5;
 
@@ -22,23 +22,22 @@ type Pedido = {
   cliente?: Cliente;
   HorarioPedido: string;
   itens: Produto[];
+  status: string;
+};
+
+const statusCor: Record<string, string> = {
+  andamento: "#f5c800",
+  concluido: "#4caf50",
+  cancelado: "#ff5050",
 };
 
 export default function Pedido() {
-  const [erro, setErro] = useState("");
   const [pagPedidos, setPagProdutos] = useState(1);
-  const [confirmarExcluir, setConfirmarExcluir] = useState<string | null>(null);
-  const [confirmarAcao, setConfirmarAcao] = useState<{
-    id: string;
-    status: "andamento" | "concluido" | "cancelado";
-  } | null>(null);
+
+  const [visualizando, setVisualizando] = useState<Pedido | null>(null);
 
   const { data: pedidos, setData: setPedidos } = useApi<Pedido[]>(
     "http://localhost:3000/api/pedidos",
-  );
-
-  const { data: produtos, setData: setProdutos } = useApi<Produto[]>(
-    "http://localhost:3000/api/produtos",
   );
 
   const navigate = useNavigate();
@@ -56,8 +55,8 @@ export default function Pedido() {
     id: string,
     status: "andamento" | "concluido" | "cancelado",
   ) {
-    await fetch(`http://localhost:3000/api/pedidos/${id}/status`, {
-      method: "PATCH",
+    await fetch(`http://localhost:3000/api/pedidos/atualizar-status/${id}`, {
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
@@ -91,6 +90,7 @@ export default function Pedido() {
               <span>CLIENTE</span>
               <span>DATA/HORA</span>
               <span>NUMERO DO PEDIDO</span>
+              <span>STATUS PEDIDO</span>
               <span>AÇÕES</span>
             </div>
             {paginar(pedidos ?? [], pagPedidos, POR_PAGINA).map((p) => (
@@ -107,6 +107,12 @@ export default function Pedido() {
                   })}
                 </span>
                 <span className={styles.celulaSecundaria}>{p.id}</span>
+                <span
+                  className={styles.celulaSecundaria}
+                  style={{ color: statusCor[p.status] ?? "#fff" }}
+                >
+                  {p.status}
+                </span>
                 <span className={styles.celulaAcoes}>
                   <button
                     className={styles.btnEditar}
@@ -156,6 +162,12 @@ export default function Pedido() {
                   )
                 }
                 onCancelar={() => setConfirmarCancelarPedido(null)}
+              />
+            )}
+            {visualizando && (
+              <ModalDetalhesPedido
+                pedido={visualizando}
+                onFechar={() => setVisualizando(null)}
               />
             )}
           </section>

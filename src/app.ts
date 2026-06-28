@@ -73,7 +73,7 @@ AppDataSource.initialize()
       swaggerUi.serve,
       swaggerUi.setup(swaggerSpec, {
         swaggerOptions: {
-          supportedSubmitMethods: ["get", "post", "put", "delete"],
+          supportedSubmitMethods: ["patch", "get", "post", "put", "delete"],
           persistAuthorization: true,
         },
       }),
@@ -84,19 +84,16 @@ AppDataSource.initialize()
 
     // rotas protegidas
     app.use("/api/clientes", autenticar, clienteRotas(clienteController));
-    app.use("/api/pedidos", autenticar, pedidoRotas(pedidoController));
     app.use("/api/produtos", autenticar, produtoRotas(produtoController));
     app.use("/api/categorias", autenticar, categoriaRotas(categoriaController));
-
-    app.get("/teste", (req, res) => {
-      res.send("OK");
-    });
+    app.use("/api/pedidos", autenticar, pedidoRotas(pedidoController));
 
     app.listen(port, () => {
       console.log(`Servidor rodando em http://localhost:${port}`);
       console.log(`Documentação: http://localhost:${port}/api-docs`);
     });
   })
+
   .catch((erro) => {
     console.error("Erro ao conectar no banco:", erro);
   });
