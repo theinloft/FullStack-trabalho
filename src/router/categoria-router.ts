@@ -17,8 +17,9 @@ export const categoriaRotas = (controller: CategoriaController): Router => {
    *         required: true
    *         description: ID da categoria
    *         schema:
-   *           type: string
-   *           example: "d9f80a07-4c1e-4ff0-b7f5-e613e476b106"
+   *           type: integer
+   *           format: int32
+   *           example: 1
    *     requestBody:
    *       required: true
    *       content:
@@ -31,7 +32,6 @@ export const categoriaRotas = (controller: CategoriaController): Router => {
    *               categoria:
    *                 type: string
    *                 example: Eletrônicos
-   *                 type: string
    *     responses:
    *       200:
    *         description: Categoria atualizada com sucesso
