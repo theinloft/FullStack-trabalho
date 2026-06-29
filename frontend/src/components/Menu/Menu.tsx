@@ -52,7 +52,7 @@ function Menu() {
           </button>
         </div>
 
-        <div className="logo">SHRED_LAB</div>
+        <div className="logo"><Link to={"/"}>SHRED_LAB</Link></div>
 
         <div className="lista">
           <ul className="nav-links">
