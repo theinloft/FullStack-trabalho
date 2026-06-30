@@ -236,11 +236,13 @@ export default function NovoPedido() {
               <input
                 className={styles.inputQtde}
                 type="number"
-                min={1}
                 value={quantidade || ""}
                 onChange={(e) => {
                   const val = e.target.value;
-                  setQuantidade(val === "" ? 1 : Number(val));
+                  setQuantidade(val === "" ? 0 : Number(val));
+                }}
+                onBlur={() => {
+                  if (quantidade < 1) setQuantidade(1);
                 }}
               />
               <button className={styles.btnAdicionar} onClick={adicionarItem}>
