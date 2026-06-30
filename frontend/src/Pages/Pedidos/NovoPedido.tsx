@@ -5,14 +5,6 @@ import Modal from "../../components/Modal/Modal";
 import { useNavigate } from "react-router-dom";
 import BuscaAutoCompletar from "../../components/BuscaAutoCompletar/BuscaAutoCompletar";
 
-type Pedido = {
-  id: string;
-  cliente?: Cliente;
-  HorarioPedido: string;
-  itens: Produto[];
-  status: string;
-};
-
 type Cliente = {
   id: string;
   nome: string;
