@@ -3,6 +3,7 @@ import styles from "./Painel.module.css";
 import Paginacao from "../../components/Paginacao/Paginacao";
 import { useNavigate } from "react-router-dom";
 import { useApi } from "../../hooks/useApi";
+import GraficoPedidosStatus from "../../components/GraficoPedidosStatus/GraficoPedidosStatus";
 
 type Cliente = {
   id: string;
@@ -19,6 +20,7 @@ type Produto = {
 type Pedido = {
   id: string;
   HorarioPedido: string;
+  status: string;
 };
 
 const POR_PAGINA = 5;
@@ -86,6 +88,8 @@ export default function Painel() {
           <span className={styles.kpiLabel}>PRODUTOS</span>
         </div>
       </div>
+
+      {pedidos && <GraficoPedidosStatus pedidos={pedidos} />}
 
       {/* Grid principal */}
       <div className={styles.grid}>
