@@ -89,10 +89,12 @@ export default function Produtos() {
       body: JSON.stringify(form),
     });
 
+    let novaImagem = editando.imagem;
+
     if (imagem) {
       const formData = new FormData();
       formData.append("imagem", imagem);
-      await fetch(
+      const resImagem = await fetch(
         `http://localhost:3000/api/produtos/imagens/upload/${editando.id}`,
         {
           method: "POST",
@@ -100,11 +102,14 @@ export default function Produtos() {
           body: formData,
         },
       );
+      const dataImagem = await resImagem.json();
+      console.log("dataImagem:", dataImagem);
+      novaImagem = dataImagem.imagem;
     }
 
     setProdutos((prev) =>
       prev
-        ? prev.map((p) => (p.id === editando.id ? { ...p, ...form } : p))
+        ? prev.map((p) => (p.id === editando.id ? { ...p, ...form, imagem: novaImagem } : p))
         : prev,
     );
     setEditando(null);
@@ -143,16 +148,15 @@ export default function Produtos() {
       },
       body: JSON.stringify(form),
     });
+
     const novo = await res.json();
-    setProdutos((prev) => (prev ? [...prev, novo] : [novo]));
-    setCriando(false);
-    setImagem(null);
-    setForm({ nome: "", preco: 0, categoriaId: 0 });
+    let novaImagem = null;
+
 
     if (imagem) {
       const formData = new FormData();
       formData.append("imagem", imagem);
-      await fetch(
+      const resImagem = await fetch(
         `http://localhost:3000/api/produtos/imagens/upload/${novo.id}`,
         {
           method: "POST",
@@ -160,7 +164,24 @@ export default function Produtos() {
           body: formData,
         },
       );
+      const dataImagem = await resImagem.json();
+      novaImagem = dataImagem.imagem;
     }
+
+
+
+
+    setProdutos((prev) =>
+      prev
+        ? [...prev, { ...novo, imagem: novaImagem }] // 👈 já adiciona com a imagem
+        : [{ ...novo, imagem: novaImagem }],
+    );
+    setCriando(false);
+    setImagem(null);
+    setForm({ nome: "", preco: 0, categoriaId: 0 });
+
+
+
   }
 
   return (
