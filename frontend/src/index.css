@@ -13,4 +13,5 @@ body {
   --cor-primaria: #f5c800;
   --cor-fundo: #111;
   --fonte-principal: "Arial", sans-serif;
+  min-width: 445px;
 }
