@@ -19,12 +19,12 @@
 
 .about .item h3{
     font-weight: 700;
-    font-size: 4rem;
+    font-size: 2rem;
 }
 
 .about .item p{
     font-weight: 400;
-    font-size: 1.8rem;
+    font-size: 1.2rem;
     margin: 30px 0;
 }
 
@@ -40,7 +40,7 @@
     width: 100%;
 }
 
-.about .image.left picture{
+.about .image picture{
     height: 100%;
     width: 100%;
 }
