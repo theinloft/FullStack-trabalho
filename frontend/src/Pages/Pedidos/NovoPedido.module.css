@@ -1,17 +1,61 @@
-.buscaCliente {
-  position: relative;
-  width: 350px;
-}
 .form {
   background-color: black;
   color: #fff;
 }
 
-.buscaCliente input {
-  width: 100%;
+.card {
+  background: #181818;
+  border: 1px solid #2d2d2d;
+  border-radius: 6px;
+  padding: 32px;
+}
+
+.dadosPedido {
+  margin-bottom: 40px;
+}
+
+.linha {
+  display: flex;
+  gap: 20px;
+  align-items: flex-end;
+}
+
+.campo {
+  flex: 1;
+}
+
+.campoProduto {
+  flex: 1;
+}
+
+.linhaProduto {
+  display: flex;
+  gap: 16px;
+  align-items: flex-end;
+  margin-top: 20px;
+}
+
+.label {
+  display: block;
+  margin-bottom: 8px;
+  color: #fff;
+  font-size: 12px;
+  letter-spacing: 1px;
+  font-family: "Arial Black", Arial, sans-serif;
+}
+
+.inputQtde {
+  width: 80px;
   padding: 8px;
 }
 
+.secaoProdutos {
+  margin-top: 40px;
+  border-top: 1px solid #2d2d2d;
+  padding-top: 30px;
+  color: #fff;
+  font-family: "Arial Black", Arial, sans-serif;
+}
 .listaClientes {
   background: #1a1a1a;
   border: 1px solid rgba(255, 255, 255, 0.15);
@@ -35,6 +79,12 @@
 
 label {
   font-family: "Arial Black", Arial, sans-serif;
+  color: #fff;
+}
+
+secaoTitulo {
+  font-family: "Arial Black", Arial, sans-serif;
+  color: #fff;
 }
 
 .btnNovo {
@@ -49,7 +99,38 @@ label {
   font-family: inherit;
 }
 
+.btnAdicionar {
+  background: #f5c800;
+  color: #111;
+  border: none;
+  padding: 10px 20px;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  font-family: inherit;
+}
+.btnAdicionar:hover {
+  background: #fff;
+}
+
 .btnNovo:hover {
+  background: #fff;
+}
+
+.btnCriar {
+  background: #f5c800;
+  color: #111;
+  border: none;
+  padding: 10px 20px;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.btnCriar:hover {
   background: #fff;
 }
 
@@ -68,4 +149,42 @@ label {
   padding: 48px;
   overflow-x: hidden;
   max-width: 100%;
+}
+
+@media (max-width: 768px) {
+  .page {
+    padding: 24px 16px;
+  }
+
+  .card {
+    padding: 20px;
+  }
+
+  .linha {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .linhaProduto {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .inputQtde {
+    width: 100%;
+  }
+
+  .btnNovo,
+  .btnAdicionar,
+  .btnCriar {
+    width: 100%;
+    padding: 12px 20px;
+  }
+
+  .secaoProdutos {
+    margin-top: 24px;
+    padding-top: 20px;
+  }
 }
