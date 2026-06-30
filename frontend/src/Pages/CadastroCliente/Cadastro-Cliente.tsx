@@ -29,7 +29,21 @@ export default function CadastroUsuario() {
         return;
       }
 
-      navigate("/login"); // sucesso → vai para o login
+      const resLogin = await fetch("http://localhost:3000/api/usuarios/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: form.email, senha: form.senha }),
+      });
+
+      const dataLogin = await resLogin.json();
+
+      if (resLogin.ok) {
+        localStorage.setItem("token", dataLogin.token);
+        window.dispatchEvent(new Event("storage"));
+        navigate("/painel");
+      } else {
+        navigate("/login");
+      }
     } catch {
       setErro("Não foi possível conectar ao servidor.");
     } finally {
