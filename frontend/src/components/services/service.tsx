@@ -3,16 +3,17 @@ import image1 from './img/produtos2.png';
 import image2 from './img/clientes2.png';
 import image3 from './img/projeto3.jpeg';
 import image4 from './img/projeto4.jpg';
+import { Link } from 'react-router-dom';
 
 
 export function Service() {
     return (
         <section className="projects" id="projects">
             <div className="project imagem1">
-                <a href="">
+                <Link to={"/fale-conosco"}>
                     <img src={image1} alt="imagem de produtos"></img>
                     <p>produtos</p>
-                </a>
+                </Link>
             </div>
             <div className="project imagem2">
                 <a href="">

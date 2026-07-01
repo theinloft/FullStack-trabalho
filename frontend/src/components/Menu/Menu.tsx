@@ -56,7 +56,9 @@ function Menu() {
 
         <div className="lista">
           <ul className="nav-links">
-            <li>TUTORIAIS</li>
+            <li>
+              <a href="#projects">TUTORIAIS</a>
+            </li>
             <li>CASE DE CLIENTES</li>
             <li>
               <Link to={"/fale-conosco"}>FALE CONOSCO</Link>
