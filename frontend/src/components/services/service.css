@@ -63,7 +63,7 @@
     }
 }
 
-@media (max-width: 4px) {
+@media (max-width: 470px) {
     .project {
         width: 100%;
     }
