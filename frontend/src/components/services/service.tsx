@@ -1,8 +1,8 @@
 import './service.css';
-import image1 from './img/produtos.png';
-import image2 from './img/clientes.png';
-import image3 from './img/pedidos.png';
-import image4 from './img/painel.png';
+import image1 from './img/produtos-m.png';
+import image2 from './img/clientes-m.png';
+import image3 from './img/pedidos-m.png';
+import image4 from './img/painel-m.png';
 import { Link } from 'react-router-dom';
 
 
