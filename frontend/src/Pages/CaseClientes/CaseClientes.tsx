@@ -21,16 +21,20 @@ const cases = [
 
 export default function GaleriaCases() {
   return (
-    <div className="galeria-section">
-      <div className="galeria-grid">
-        {cases.map((item, i) => (
-          <div key={i} className="card">
-            <img src={item.src} alt={item.alt} className="galeria-img" />
-            <p className="texto">"{item.texto}"</p>
-            <p className="nome">{item.nome}</p>
-            <p className="empresa">{item.empresa}</p>
-          </div>
-        ))}
+    <div className="galeria-wrapper">
+      <h1 className="galeria-titulo">CASES DE CLIENTES - DEPOIMENTOS</h1>
+
+      <div className="galeria-section">
+        <div className="galeria-grid">
+          {cases.map((item, i) => (
+            <div key={i} className="card">
+              <img src={item.src} alt={item.alt} className="galeria-img" />
+              <p className="texto">"{item.texto}"</p>
+              <p className="nome">{item.nome}</p>
+              <p className="empresa">{item.empresa}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
