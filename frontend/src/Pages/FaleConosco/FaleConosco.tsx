@@ -69,6 +69,21 @@ export default function FaleConosco() {
             />
           </div>
 
+          <div className="campo full">
+            <label htmlFor="endereco" className="input">
+              Endereço<span className="obrig">*</span>
+            </label>
+            <input
+              id="endereco"
+              type="text"
+              name="endereco"
+              className="input"
+              placeholder="Rua, avenida..."
+              autoComplete="address-line1"
+              required
+            />
+          </div>
+
           <div className="campo">
             <label htmlFor="cep" className="input">
               CEP<span className="obrig">*</span>
@@ -95,21 +110,6 @@ export default function FaleConosco() {
               name="numero"
               className="input"
               min={0}
-              required
-            />
-          </div>
-
-          <div className="campo full">
-            <label htmlFor="endereco" className="input">
-              Endereço<span className="obrig">*</span>
-            </label>
-            <input
-              id="endereco"
-              type="text"
-              name="endereco"
-              className="input"
-              placeholder="Rua, avenida..."
-              autoComplete="address-line1"
               required
             />
           </div>

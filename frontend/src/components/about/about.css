@@ -3,7 +3,8 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
-    background-color: #fafafa;
+    background-color:#efe4c9;
+    
     max-width: 1920px;
     margin: 0 auto;
     font-family: 'Segoe UI', Arial, sans-serif;
