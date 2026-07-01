@@ -89,12 +89,10 @@ export default function Produtos() {
       body: JSON.stringify(form),
     });
 
-    let novaImagem = editando.imagem;
-
     if (imagem) {
       const formData = new FormData();
       formData.append("imagem", imagem);
-      const resImagem = await fetch(
+      await fetch(
         `http://localhost:3000/api/produtos/imagens/upload/${editando.id}`,
         {
           method: "POST",
@@ -102,16 +100,14 @@ export default function Produtos() {
           body: formData,
         },
       );
-      const dataImagem = await resImagem.json();
-      console.log("dataImagem:", dataImagem);
-      novaImagem = dataImagem.imagem;
     }
 
-    setProdutos((prev) =>
-      prev
-        ? prev.map((p) => (p.id === editando.id ? { ...p, ...form, imagem: novaImagem } : p))
-        : prev,
-    );
+    const resProdutos = await fetch("http://localhost:3000/api/produtos", {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    const produtosAtualizados = await resProdutos.json();
+    setProdutos(produtosAtualizados);
+
     setEditando(null);
     setImagem(null);
   }
@@ -152,7 +148,6 @@ export default function Produtos() {
     const novo = await res.json();
     let novaImagem = null;
 
-
     if (imagem) {
       const formData = new FormData();
       formData.append("imagem", imagem);
@@ -168,9 +163,6 @@ export default function Produtos() {
       novaImagem = dataImagem.imagem;
     }
 
-
-
-
     setProdutos((prev) =>
       prev
         ? [...prev, { ...novo, imagem: novaImagem }] // 👈 já adiciona com a imagem
@@ -179,9 +171,6 @@ export default function Produtos() {
     setCriando(false);
     setImagem(null);
     setForm({ nome: "", preco: 0, categoriaId: 0 });
-
-
-
   }
 
   return (

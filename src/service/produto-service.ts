@@ -40,14 +40,18 @@ export class ProdutoService {
     return produto;
   }
 
-  async atualizar(id: string, produtoAlterado: Produto): Promise<Produto> {
+  async atualizar(id: string, produtoAlterado: any): Promise<Produto> {
     if (produtoAlterado && produtoAlterado.nome && produtoAlterado.preco) {
       const produto = await this.repository.findOneBy({ id: id });
       if (produto) {
         produto.nome = produtoAlterado.nome;
         produto.preco = produtoAlterado.preco;
-        produto.categoria = produtoAlterado.categoria;
         produto.imagem = produtoAlterado.imagem;
+
+        if (produtoAlterado.categoriaId) {
+          produto.categoria = { id: produtoAlterado.categoriaId } as any;
+        }
+
         await this.repository.save(produto);
         return produto;
       } else {
