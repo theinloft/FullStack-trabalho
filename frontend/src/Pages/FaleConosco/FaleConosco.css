@@ -1,90 +1,329 @@
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;1,500&family=Special+Elite&family=Inter:wght@400;500;600&display=swap");
+
 .contato {
+  --ink: #241c14;
+  --paper: #f7f1e2;
+  --paper-deep: #efe4c9;
+  --mustard: #d99a2b;
+  --mustard-deep: #b87d1c;
+  --rust: #a8432b;
+  --line: #c9bb96;
+
+  display: grid;
+  grid-template-columns: 44% 56%;
+  width: 100%;
+  min-height: 100vh;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Inter", system-ui, sans-serif;
+}
+
+/* ---------- Mapa / "postal" lado esquerdo ---------- */
+
+.mapa {
+  position: relative;
+  background: var(--paper-deep);
+  border-right: none;
+  padding: 28px;
   display: flex;
-  flex-wrap: wrap;
+  align-items: center;
   justify-content: center;
+}
+
+.mapa::before {
+  content: "";
+  position: absolute;
+  inset: 16px;
+  border: 1.5px solid var(--ink);
+  pointer-events: none;
+}
+
+.mapa-frame {
+  position: relative;
   width: 100%;
   height: 100%;
-  font-family: "Arial Black", Arial, sans-serif;
 }
 
 .mapa iframe {
-  width: 600px;
-  height: 100%;
-}
-
-.input {
-  font-family: "Arial Black", Arial, sans-serif;
-}
-
-form {
   width: 100%;
   height: 100%;
+  min-height: 420px;
+  display: block;
+  filter: grayscale(55%) sepia(12%) contrast(1.02);
+  transition: filter 0.5s ease;
 }
 
-.mapa {
-  border-left: 1px dotted #f5c800;
-  border-right: 1px dotted #f5c800;
+.mapa-frame:hover iframe {
+  filter: grayscale(0%) sepia(0%);
 }
+
+.selo {
+  position: absolute;
+  top: -14px;
+  right: -14px;
+  width: 108px;
+  height: 108px;
+  border-radius: 50%;
+  border: 2px dashed var(--rust);
+  background: var(--paper);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transform: rotate(-9deg);
+  z-index: 2;
+  box-shadow: 0 3px 10px rgba(36, 28, 20, 0.18);
+}
+
+.selo span {
+  font-family: "Special Elite", "Courier New", monospace;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  line-height: 1.4;
+  color: var(--rust);
+  text-transform: uppercase;
+}
+
+/* ---------- Painel do formulário ---------- */
 
 .form_contato {
+  position: relative;
   height: 100%;
-  width: 40%;
+  width: 100%;
+  padding: 44px 56px 32px;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+.form_contato::before,
+.form_contato::after {
+  content: "";
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border-color: var(--ink);
+  border-style: solid;
+}
+
+.form_contato::before {
+  top: 18px;
+  left: 20px;
+  border-width: 2px 0 0 2px;
+}
+
+.form_contato::after {
+  bottom: 18px;
+  right: 20px;
+  border-width: 0 2px 2px 0;
+}
+
+.eyebrow {
+  display: block;
+  text-align: center;
+  font-family: "Special Elite", "Courier New", monospace;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--rust);
+  margin-bottom: 4px;
 }
 
 .form_contato h1 {
-  color: #f5c800;
+  font-family: "Fraunces", Georgia, serif;
+  font-weight: 600;
+  font-style: italic;
+  color: var(--ink);
   text-align: center;
-  margin: 5px 0px 0px 0px;
-  font-size: 30px;
-  padding: 10px 0;
+  margin: 0 0 6px 0;
+  font-size: 34px;
+  letter-spacing: 0.01em;
+}
+
+.subtitulo {
+  display: block;
+  text-align: center;
+  font-size: 13.5px;
+  color: #5a5142;
+  margin-bottom: 6px;
+}
+
+.regua {
+  border: none;
+  border-top: 1.5px dashed var(--line);
+  margin: 18px 0 26px;
 }
 
 form {
-  height: 100%;
+  height: auto;
   width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 20px;
+  row-gap: 0;
 }
 
-textarea {
-  width: 95%;
-  font-size: 16px;
-  margin: 15px 20px;
-  border: 1px solid;
-  padding-left: 6px;
-  font-family: "Arial Black", Arial, sans-serif;
+.campo {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 18px;
+}
+
+.campo.full {
+  grid-column: 1 / -1;
+}
+
+label.input {
+  font-family: "Special Elite", "Courier New", monospace;
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin-bottom: 8px;
+  background-color: var(--line);
+}
+
+label.input .obrig {
+  color: var(--rust);
+  margin-left: 3px;
+}
+
+input.input,
+textarea.input {
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 15.5px;
+  color: var(--ink);
+  background: transparent;
+  border: none;
+  border-bottom: 1.5px solid var(--line);
+  padding: 6px 2px 8px;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+input.input::placeholder,
+textarea.input::placeholder {
+  color: #9c927a;
+}
+
+input.input:focus,
+textarea.input:focus {
+  outline: none;
+  border-bottom-color: var(--rust);
+  background: rgba(217, 154, 43, 0.06);
 }
 
 .obs {
   display: block;
-  font-size: 16px;
-  margin: 5px 20px;
-  margin-top: 10px;
-  padding-left: 2px;
-  font-family: "Arial Black", Arial, sans-serif;
+  font-family: "Special Elite", "Courier New", monospace;
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--ink);
+  grid-column: 1 / -1;
+  margin: 4px 0 8px;
+}
+
+textarea.input {
+  grid-column: 1 / -1;
+  resize: vertical;
+  min-height: 96px;
+  border: 1.5px solid var(--line);
+  padding: 10px 12px;
+  margin-bottom: 8px;
+}
+
+.contador {
+  grid-column: 1 / -1;
+  text-align: right;
+  font-size: 11.5px;
+  color: #8a8168;
+  margin: -4px 0 20px;
+}
+
+/* ---------- Botão / carimbo de envio ---------- */
+
+.rodape-form {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.dica-envio {
+  font-size: 12px;
+  color: #7a715a;
+  font-style: italic;
 }
 
 .botao {
-  float: right;
-  width: 100px;
-  margin: 15px 56px;
-  background-color: #f5c800;
-  color: #000;
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  font-family: "Arial Black", Arial, sans-serif;
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--ink);
+  border: 2px dashed var(--ink);
+  font-family: "Special Elite", "Courier New", monospace;
   font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transform: rotate(-6deg);
+  transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease,
+    border-color 0.25s ease;
 }
+
+.botao:hover {
+  transform: rotate(0deg) scale(1.04);
+  background: var(--mustard);
+  border-color: var(--mustard-deep);
+  color: var(--ink);
+}
+
+.botao:focus-visible {
+  outline: 3px solid var(--rust);
+  outline-offset: 4px;
+}
+
+/* ---------- Responsivo ---------- */
 
 @media only screen and (max-width: 990px) {
   .contato {
-    height: 100%;
+    grid-template-columns: 1fr;
+  }
+
+  .mapa {
+    padding: 20px;
+  }
+
+  .mapa iframe {
+    min-height: 260px;
   }
 
   .form_contato {
-    height: 100%;
-    width: 80%;
+    padding: 36px 24px 28px;
   }
 
   .form_contato h1 {
-    font-size: 20px;
-    padding: 10px 0;
+    font-size: 24px;
+  }
+
+  form {
+    grid-template-columns: 1fr;
+  }
+
+  .campo {
+    grid-column: 1 / -1;
+  }
+
+  .rodape-form {
+    justify-content: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mapa iframe,
+  .botao {
+    transition: none;
   }
 }
