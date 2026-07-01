@@ -21,7 +21,8 @@
     "reflect-metadata": "^0.2.2",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^4.6.3",
-    "typeorm": "^0.3.28"
+    "typeorm": "^0.3.28",
+    "yet-another-react-lightbox": "^3.32.0"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",

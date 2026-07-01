@@ -52,14 +52,18 @@ function Menu() {
           </button>
         </div>
 
-        <div className="logo"><Link to={"/"}>SHRED_LAB</Link></div>
+        <div className="logo">
+          <Link to={"/"}>SHRED_LAB</Link>
+        </div>
 
         <div className="lista">
           <ul className="nav-links">
             <li>
               <a href="#projects">TUTORIAIS</a>
             </li>
-            <li>CASE DE CLIENTES</li>
+            <li>
+              <Link to={"/cases-clientes"}>CASE DE CLIENTES</Link>{" "}
+            </li>
             <li>
               <Link to={"/fale-conosco"}>FALE CONOSCO</Link>
             </li>

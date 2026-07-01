@@ -11,6 +11,7 @@ import Pedidos from "./Pages/Pedidos/Pedidos";
 import FaleConosco from "./Pages/FaleConosco/FaleConosco";
 import NovoPedido from "./Pages/Pedidos/NovoPedido";
 import { Categoria } from "./Pages/Categoria/Categoria";
+import GaleriaCases from "./Pages/CaseClientes/CaseClientes";
 
 function App() {
   return (
@@ -21,6 +22,8 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/cadastro-cliente" element={<CadastroCliente />} />
           <Route path="/fale-conosco" element={<FaleConosco />} />
+
+          <Route path="/cases-clientes" element={<GaleriaCases />} />
 
           <Route element={<LayoutPainel />}>
             <Route path="/painel" element={<Painel />} />
