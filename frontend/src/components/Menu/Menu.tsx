@@ -93,6 +93,15 @@ function Menu() {
                 >
                   SAIR
                 </button>
+                <button
+                  className="perfil-sair"
+                  onClick={() => {
+                    setPerfilAberto(false);
+                    window.location.href = "/painel";
+                  }}
+                >
+                  PAINEL
+                </button>
               </div>
             )}
           </div>
