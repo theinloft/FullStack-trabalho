@@ -177,9 +177,12 @@ label.input {
   font-size: 12px;
   letter-spacing: 0.05em;
   text-transform: uppercase;
+  height: 20px;
   color: var(--ink);
   margin-bottom: 8px;
   background-color: var(--line);
+  padding-top: 5px;
+  
 }
 
 label.input .obrig {
