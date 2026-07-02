@@ -61,7 +61,7 @@ export default function CadastroUsuario() {
           <label className="label">Nome</label>
           <input
             type="text"
-            className="input"
+            className="inputcad"
             value={form.nome}
             onChange={(e) => atualizar("nome", e.target.value)}
           />
@@ -71,7 +71,7 @@ export default function CadastroUsuario() {
           <label className="label">Email</label>
           <input
             type="email"
-            className="input"
+            className="inputcad"
             value={form.email}
             onChange={(e) => atualizar("email", e.target.value)}
           />
@@ -81,7 +81,7 @@ export default function CadastroUsuario() {
           <label className="label">Senha</label>
           <input
             type="password"
-            className="input"
+            className="inputcad"
             value={form.senha}
             onChange={(e) => atualizar("senha", e.target.value)}
           />

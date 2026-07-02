@@ -13,11 +13,12 @@
   max-width: 400px;
 }
 
-.logo {
+h1.logo {
   color: #f5c800;
   font-family: "Arial Black", Arial, sans-serif;
   font-size: 32px;
   margin-bottom: 8px;
+  display: flex;
 }
 
 .subtitulo {
@@ -37,7 +38,7 @@
   letter-spacing: 2px;
 }
 
-.input {
+.inputcad{
   display: block;
   width: 100%;
   margin-top: 8px;
@@ -49,7 +50,7 @@
   box-sizing: border-box;
 }
 
-.input:focus {
+.inputcad:focus {
   outline: none;
   border-color: #f5c800;
 }
