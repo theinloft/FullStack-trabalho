@@ -1,26 +1,32 @@
 import { useState } from "react";
-import "./Democlientes.css";
+import "./Demopedidos.css";
 import { Link } from "react-router-dom";
 
 const guias = [
     {
         id: "One",
-        titulo: "Cadastrar Clientes",
-        texto: "Painel de cadastro simples e de fácil compreensão.",
+        titulo: "Criar Pedido",
+        texto: "Para criar um pedido, dentro do painel interno, você deve clicar no botão Pedidos.",
     },
     {
         id: "Two",
-        titulo: "Novo Clientes",
-        texto: "Ao clicar no botão, + Novo Cliente, adicionar as informções Nome e Email.",
+        titulo: "Novo Pedido",
+        texto: "Ao clicar no botão, + Novo Pedido, selecionar o cliente que deve já estar cadastrado.",
     },
     {
         id: "Three",
-        titulo: "Editar ou excluir informações do cliente",
-        texto: "Ficam sempre disponíveis as opções de editar ou excluir clinete.",
+        titulo: "Selecionar o produto e a quantidade",
+        texto: "O campo de prodiutos possui autocompletar para facilitar na busca do produto. Após, inserir a qunatidade.",
     },
+    {
+        id: "Four",
+        titulo: "Pedido criado",
+        texto: "Com o pedido já criado, você terá as opções de concluir, editar ou cancelar o pedido. ",
+    },
+
 ];
 
-export default function Democlientes() {
+export default function Demopedidos() {
     const [aberto, setAberto] = useState<string | null>(null);
 
     const toggle = (id: string) => {
@@ -28,13 +34,13 @@ export default function Democlientes() {
     };
 
     return (
-        <section id="democlientes">
-
-            <h2>Clientes</h2>
+        <section id="demopedidos">
+            
+            <h2>Pedidos</h2>
             <div className="imagem">
                 <picture>
-                    <source media="(max-width: 768px)" srcSet="/democlientes/democlientes-pequena.jpg" />
-                    <img src="/democlientes/democlientes.jpg" alt="imagem do painel de clientes" />
+                    <source media="(max-width: 768px)" srcSet="/demopedidos/demopedidos-pequena.jpg" />
+                    <img src="/demopedidos/demopedidos.jpg" alt="imagem do painel de clientes" />
                 </picture>
             </div>
             <div className="accordion" id="accordionExample">
@@ -69,7 +75,7 @@ export default function Democlientes() {
             </div>
             <div className="return">
                 <Link to={"/"}>Voltar</Link>
-            </div>
+            </div>            
         </section>
     );
 }

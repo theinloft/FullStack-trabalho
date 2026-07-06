@@ -13,6 +13,9 @@ import NovoPedido from "./Pages/Pedidos/NovoPedido";
 import { Categoria } from "./Pages/Categoria/Categoria";
 import GaleriaCases from "./Pages/CaseClientes/CaseClientes";
 import Democlientes from "./Pages/Democlientes/Democlientes";
+import Demoprodutos from "./Pages/Demoprodutos/Demoprodutos";
+import Demopedidos from "./Pages/Demopedidos/Demopedidos";
+import Demopainel from "./Pages/Demopainel/Demopainel";
 
 function App() {
   return (
@@ -25,6 +28,9 @@ function App() {
           <Route path="/fale-conosco" element={<FaleConosco />} />
           <Route path="/cases-clientes" element={<GaleriaCases />} />
           <Route path="/democlientes" element={<Democlientes />} />
+          <Route path="/demoprodutos" element={<Demoprodutos />} />
+          <Route path="/demopedidos" element={<Demopedidos />} />
+          <Route path="/demopainel" element={<Demopainel />} />
 
           <Route element={<LayoutPainel />}>
             <Route path="/painel" element={<Painel />} />

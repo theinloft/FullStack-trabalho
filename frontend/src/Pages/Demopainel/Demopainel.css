@@ -25,7 +25,7 @@ a {
 
 /* Accordion de depoimentos - versão controlada por React (useState) */
 
-#democlientes {
+#demopainel {
     min-height: 420px;
     width: 100%;
     padding: 20px 0;
@@ -33,7 +33,7 @@ a {
     font-family: "Inter", system-ui, sans-serif;
 }
 
-#democlientes h2 {
+#demopainel h2 {
     font-size: 40px;
     color: #F28A21;
     text-align: center;
