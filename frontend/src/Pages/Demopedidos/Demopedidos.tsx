@@ -11,12 +11,12 @@ const guias = [
     {
         id: "Two",
         titulo: "Novo Pedido",
-        texto: "Ao clicar no botão, + Novo Pedido, selecionar o cliente que deve já estar cadastrado.",
+        texto: "Ao clicar no botão, + Novo Pedido, selecionar o cliente que já deve estar cadastrado.",
     },
     {
         id: "Three",
         titulo: "Selecionar o produto e a quantidade",
-        texto: "O campo de prodiutos possui autocompletar para facilitar na busca do produto. Após, inserir a qunatidade.",
+        texto: "O campo de produtos possui autocompletar para facilitar na busca do produto. Após selecionar o produto, inserir a qunatidade desejada.",
     },
     {
         id: "Four",

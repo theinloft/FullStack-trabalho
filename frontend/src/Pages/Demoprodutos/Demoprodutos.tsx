@@ -6,7 +6,7 @@ const guias = [
     {
         id: "One",
         titulo: "Cadastrar Produto",
-        texto: "Cadastro de produtos rápido e intuitivo. Porém, antes de cadastrar um produto uma categoria de ser cadastrada.",
+        texto: "Cadastro de produtos rápido e intuitivo. Porém, antes de cadastrar um produto uma categoria deve ser cadastrada.",
     },
     {
         id: "Two",
@@ -16,7 +16,7 @@ const guias = [
     {
         id: "Three",
         titulo: "Editar informações do produto",
-        texto: "Para editar um produto, clicar no botao editar na mesma linha do produto. Informar as novas informações e imagem e salvar. ",
+        texto: "Para editar um produto, clicar no botao editar na mesma linha do produto. Informar as novas informações, imagem e salvar. ",
     },
     {
         id: "Four",
