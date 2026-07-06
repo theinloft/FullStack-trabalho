@@ -11,7 +11,7 @@ const guias = [
     {
         id: "Two",
         titulo: "Gráfico",
-        texto: "Aboradagem gráfico sobre os pedidos de acordo com o status de cada um.",
+        texto: "Aboradagem gráfica sobre os pedidos de acordo com o status de cada um.",
     },
     {
         id: "Three",
@@ -21,7 +21,7 @@ const guias = [
     {
         id: "Four",
         titulo: "Tabela de clientes",
-        texto: "Tabela com uma lista dos últimos clinetes adicionados.",
+        texto: "Tabela com uma lista dos últimos clientes adicionados.",
     },
     {
         id: "Five",
