@@ -115,8 +115,12 @@ function Menu() {
       {menuAberto && (
         <div className="menu-mobile">
           <ul>
-            <li>TUTORIAIS</li>
-            <li>CASE DE CLIENTES</li>
+            <li>
+              <a href="#projects">TUTORIAIS</a>
+            </li>
+            <li>
+              <Link to={"/cases-clientes"}>CASE DE CLIENTES</Link>{" "}
+            </li>
             <li>
               <Link to={"/fale-conosco"}>FALE CONOSCO</Link>
             </li>
