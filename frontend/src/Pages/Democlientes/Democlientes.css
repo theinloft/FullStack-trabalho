@@ -13,14 +13,34 @@ picture img {
     width: 100%;
     justify-content: center;
     text-align: center;
+    margin-top: 10px;
 }
 
-a {
-    margin-top: 15px;
+.btn-know-more{
+    font-size: 1rem;
+    font-weight: 600;
+    align-self: flex-start;
     text-decoration: none;
-    font-family: "Arial Black", Arial, sans-serif;
-    color: var(--rust); 
+    color: #fff;
+    background-color: #ff5722;
+    padding: 12px 28px;
+    border-radius: 999px;
+    box-shadow: 0 6px 16px rgba(255, 87, 34, 0.25);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
 }
+
+.btn-know-more:hover{
+    background-color: #e64a19;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 22px rgba(255, 87, 34, 0.35);
+}
+
+.btn-know-more:active{
+    transform: translateY(0);
+    box-shadow: 0 4px 10px rgba(255, 87, 34, 0.3);
+}
+
+
 
 
 /* Accordion de depoimentos - versão controlada por React (useState) */

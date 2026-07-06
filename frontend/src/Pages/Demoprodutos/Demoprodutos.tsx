@@ -74,7 +74,7 @@ export default function Demoprodutos() {
                 })}
             </div>
             <div className="return">
-                <Link to={"/"}>Voltar</Link>
+                <Link to={"/"} className="btn-know-more">Voltar</Link>
             </div>            
         </section>
     );
