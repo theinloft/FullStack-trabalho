@@ -1,11 +1,14 @@
 import { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./Menu.css";
 function Menu() {
   const [menuAberto, setMenuAberto] = useState(false);
   const [perfilAberto, setPerfilAberto] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const [token, setToken] = useState(localStorage.getItem("token"));
+
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     function handleStorage() {
@@ -36,6 +39,19 @@ function Menu() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  function irParaTutoriais(e: React.MouseEvent) {
+    e.preventDefault();
+    setMenuAberto(false);
+
+    if (location.pathname === "/") {
+      document
+        .getElementById("projects")
+        ?.scrollIntoView({ behavior: "smooth" });
+    } else {
+      navigate("/", { state: { scrollTo: "projects" } });
+    }
+  }
+
   return (
     <>
       <nav className="menu">
@@ -59,7 +75,9 @@ function Menu() {
         <div className="lista">
           <ul className="nav-links">
             <li>
-              <a href="#projects">TUTORIAIS</a>
+              <a href="#projects" onClick={irParaTutoriais}>
+                TUTORIAIS
+              </a>
             </li>
             <li>
               <Link to={"/cases-clientes"}>CASE DE CLIENTES</Link>{" "}
