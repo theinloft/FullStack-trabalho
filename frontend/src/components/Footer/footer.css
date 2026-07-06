@@ -47,6 +47,10 @@
 
 }
 
+.lista-footer{
+	padding-left: 25px;
+}
+
 .footer-links li{
 	width: 150px;
 	margin: 15px 0;
@@ -110,9 +114,28 @@
 	transform: translateY(-10px);
 }
 
-@media (max-width: 535px){
+@media (max-width: 600px){
 	.foot {
 	width: 100%;
 	height: 350px;
+	justify-content: center;
 	}
+
+	.lista-footer{
+	padding-left: 0px;
+}
+
+	.area-footer{
+		display: flex;
+		justify-content: center;
+	}
+
+	address {
+		text-align: center;
+	}
+
+	 .foot ul {
+		text-align: center;
+	}
+
 }
